@@ -1,5 +1,7 @@
 package org.example;
 
+import static org.example.SerialiseUtils.deserialise;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -14,11 +16,12 @@ import java.util.logging.Logger;
 
 public class Server {
   private ServerSocketChannel server;
+  // used to check if channel has data to read
   private static Selector selector = null;
 
   private static Logger log = Logger.getLogger(Server.class.getName());
 
-  public Server() throws IOException {
+  public Server() throws IOException, ClassNotFoundException {
     log.info("Starting the server.");
     selector = Selector.open();
     ServerSocketChannel socket = ServerSocketChannel.open();
@@ -33,40 +36,28 @@ public class Server {
 
       while (i.hasNext()) {
         SelectionKey key = i.next();
-
-        if (key.isAcceptable()) {
-          handleAccept(socket, key);
-        } else if (key.isReadable()) {
-          handleRead(key);
-        }
+        if (key.isAcceptable()) handleAccept(socket, key);
+        else if (key.isReadable()) handleRead(key);
         i.remove();
       }
     }
   }
 
-  private static void handleAccept(ServerSocketChannel mySocket,
-      SelectionKey key) throws IOException {
+  private static void handleAccept(ServerSocketChannel mySocket, SelectionKey key)
+      throws IOException {
     SocketChannel client = mySocket.accept();
     client.configureBlocking(false);
     client.register(selector, SelectionKey.OP_READ);
     log.info("Connection is accepted.");
   }
 
-  private static void handleRead(SelectionKey key) throws IOException {
+  private static void handleRead(SelectionKey key) throws IOException, ClassNotFoundException {
     log.info("Reading info.");
     SocketChannel client = (SocketChannel) key.channel();
-
     ByteBuffer buffer = ByteBuffer.allocate(1024);
     client.read(buffer);
-
-    String data = new String(buffer.array()).trim();
-    if (data.length() > 0) {
-      log.info("Received data from client.");
-      if (data.equalsIgnoreCase("exit")) {
-        client.close();
-        log.info("Closing connection.");
-      }
-    }
+    Album data = SerialiseUtils.deserialise(buffer.array());
+    System.out.println(data);
+    log.info("Received data from client.");
   }
-
 }

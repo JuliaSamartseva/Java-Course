@@ -1,24 +1,23 @@
 package org.example;
 
-import static org.junit.Assert.assertTrue;
-
+import static org.junit.Assert.assertEquals;
 import java.io.IOException;
-import org.junit.Before;
+import java.util.concurrent.TimeUnit;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AppTest {
+  static Server server;
+  static Client client;
 
-  Server server;
-  Client client;
-
-  @Before
-  public void startServerTest(){
+  @BeforeClass
+  public static void startServerTest(){
     Thread serverThread = new Thread(new Runnable() {
       @Override
       public void run() {
         try {
           server = new Server();
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
           e.printStackTrace();
         }
       }
@@ -27,8 +26,18 @@ public class AppTest {
   }
 
   @Test
-  public void shouldAnswerWithTrue() throws IOException {
-    client = new Client();
-
+  public void serialization() throws IOException, ClassNotFoundException {
+    Album album = new Album("Title", "Artist", 1990);
+    byte[] serializedObject = SerialiseUtils.serialise(album);
+    Album deserializedObject = SerialiseUtils.deserialise(serializedObject);
+    assertEquals(deserializedObject, album);
   }
+
+  @Test
+  public void testServerConnection() throws IOException, InterruptedException {
+    Album firstAlbum = new Album("First Title", "Artist", 1980);
+    client = new Client();
+    client.sendMessage(firstAlbum);
+  }
+
 }
