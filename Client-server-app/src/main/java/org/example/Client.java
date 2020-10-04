@@ -37,9 +37,8 @@ public class Client {
     System.out.println("Client connection closed");
   }
 
-  public void sendMessage(String msg) throws IOException {
-
-    buffer = ByteBuffer.wrap(msg.getBytes());
+  public void sendMessage(Album album) throws IOException {
+    buffer = ByteBuffer.wrap(SerialiseUtils.serialise(album));
     String response = null;
     client.write(buffer);
     buffer.clear();
