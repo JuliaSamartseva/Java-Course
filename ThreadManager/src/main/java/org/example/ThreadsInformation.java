@@ -10,22 +10,25 @@ import java.util.Map;
 public class ThreadsInformation {
 
   public ArrayList<Thread> processedThreads = new ArrayList<>();
+  public static boolean processed = false;
 
   public Thread getInformation(ThreadGroup group) {
-    Runnable runnable = () -> {
-      while (group.activeCount() > 0) {
-        ArrayList<ThreadInformation> threads = new ArrayList<>();
-        getThreadGroups(group, threads);
-        for (ThreadInformation thread : threads) {
-          System.out.println(thread);
-        }
-        try {
-          Thread.sleep(5000);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-      }
-    };
+    Runnable runnable =
+        () -> {
+          while (group.activeCount() > 0) {
+            ArrayList<ThreadInformation> threads = new ArrayList<>();
+            getThreadGroups(group, threads);
+            processed = true;
+            for (ThreadInformation thread : threads) {
+              System.out.println(thread);
+            }
+            try {
+              Thread.sleep(5000);
+            } catch (InterruptedException e) {
+              e.printStackTrace();
+            }
+          }
+        };
     Thread t = new Thread(runnable);
     t.start();
     return t;
@@ -64,6 +67,4 @@ public class ThreadsInformation {
       return String.format("Group:%s, Thread Name:%s, Thread id: %s", groupName, threadName, id);
     }
   }
-
 }
-

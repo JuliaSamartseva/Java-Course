@@ -38,6 +38,14 @@ public class AppTest {
     Album firstAlbum = new Album("First Title", "Artist", 1980);
     client = new Client();
     client.sendMessage(firstAlbum);
+    synchronized(Thread.currentThread()) {
+      try {
+        Thread.currentThread().wait(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+    assertEquals(firstAlbum, server.getLastMessage());
   }
 
 }

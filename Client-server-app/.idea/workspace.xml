@@ -22,7 +22,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="014b1535-02c2-434b-820d-f305ce7b0493" name="Default Changelist" comment="" />
+    <list default="true" id="014b1535-02c2-434b-820d-f305ce7b0493" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/AppTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ThreadManager/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ThreadManager/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ThreadManager/src/main/java/org/example/ThreadsInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ThreadManager/src/main/java/org/example/ThreadsInformation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ThreadManager/src/test/java/org/example/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ThreadManager/src/test/java/org/example/AppTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,6 +69,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -158,22 +166,22 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="501" y="181" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1601567014284" />
-    <state width="1493" height="364" key="GridCell.Tab.0.bottom" timestamp="1601745713925">
+    <state width="1493" height="315" key="GridCell.Tab.0.bottom" timestamp="1601893216412">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="364" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1601745713925" />
-    <state width="1493" height="364" key="GridCell.Tab.0.center" timestamp="1601745713925">
+    <state width="1493" height="315" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1601893216412" />
+    <state width="1493" height="315" key="GridCell.Tab.0.center" timestamp="1601893216407">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="364" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1601745713925" />
-    <state width="1493" height="364" key="GridCell.Tab.0.left" timestamp="1601745713916">
+    <state width="1493" height="315" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1601893216407" />
+    <state width="1493" height="315" key="GridCell.Tab.0.left" timestamp="1601893216407">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="364" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1601745713916" />
-    <state width="1493" height="364" key="GridCell.Tab.0.right" timestamp="1601745713925">
+    <state width="1493" height="315" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1601893216407" />
+    <state width="1493" height="315" key="GridCell.Tab.0.right" timestamp="1601893216407">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="364" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1601745713925" />
+    <state width="1493" height="315" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1601893216407" />
     <state width="1493" height="205" key="GridCell.Tab.1.bottom" timestamp="1601582727118">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

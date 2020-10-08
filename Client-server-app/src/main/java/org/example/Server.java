@@ -18,6 +18,7 @@ public class Server {
   private ServerSocketChannel server;
   // used to check if channel has data to read
   private static Selector selector = null;
+  private static Album lastMessage;
 
   private static Logger log = Logger.getLogger(Server.class.getName());
 
@@ -57,7 +58,12 @@ public class Server {
     ByteBuffer buffer = ByteBuffer.allocate(1024);
     client.read(buffer);
     Album data = SerialiseUtils.deserialise(buffer.array());
+    lastMessage = data;
     System.out.println(data);
     log.info("Received data from client.");
+  }
+
+  public static Album getLastMessage() {
+    return lastMessage;
   }
 }
