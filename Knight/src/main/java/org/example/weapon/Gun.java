@@ -36,5 +36,3 @@ public class Gun implements Weapon {
     this.weight = weight;
   }
 }
-
-
