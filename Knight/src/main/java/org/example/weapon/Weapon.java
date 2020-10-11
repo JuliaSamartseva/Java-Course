@@ -1,10 +1,12 @@
 package org.example.weapon;
 
-public interface Weapon {
+import org.example.Equipment;
+
+public interface Weapon extends Equipment {
   String getName();
-  Integer getCost();
+  Integer getPrice();
   Integer getWeight();
   void setName(String name);
-  void setCost(Integer cost);
+  void setPrice(Integer price);
   void setWeight(Integer weight);
 }

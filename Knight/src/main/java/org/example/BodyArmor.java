@@ -1,9 +1,9 @@
 package org.example;
 
-public class Shield implements Equipment {
+public class BodyArmor implements Equipment {
   private String description;
-  private Integer price = 50;
-  private Integer weight = 10;
+  private Integer price = 150;
+  private Integer weight = 60;
 
   @Override
   public Integer getPrice() {

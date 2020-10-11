@@ -13,8 +13,8 @@ public class WeaponDecorator implements Weapon {
   }
 
   @Override
-  public Integer getCost() {
-    return weapon.getCost();
+  public Integer getPrice() {
+    return weapon.getPrice();
   }
 
   @Override
@@ -28,8 +28,8 @@ public class WeaponDecorator implements Weapon {
   }
 
   @Override
-  public void setCost(Integer cost) {
-    weapon.setCost(cost);
+  public void setPrice(Integer price) {
+    weapon.setPrice(price);
   }
 
   @Override

@@ -12,8 +12,8 @@ public class SpeedUpgrade extends WeaponDecorator {
   }
 
   @Override
-  public Integer getCost() {
-    return weapon.getCost() + 50;
+  public Integer getPrice() {
+    return weapon.getPrice() + 50;
   }
 
   @Override

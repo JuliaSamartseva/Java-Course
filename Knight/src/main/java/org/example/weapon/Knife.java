@@ -3,7 +3,7 @@ package org.example.weapon;
 public class Knife implements Weapon {
 
   private String name = "Knife";
-  private Integer cost = 100;
+  private Integer price = 100;
   private Integer weight = 100;
 
   @Override
@@ -17,13 +17,13 @@ public class Knife implements Weapon {
   }
 
   @Override
-  public Integer getCost() {
-    return cost;
+  public Integer getPrice() {
+    return price;
   }
 
   @Override
-  public void setCost(Integer cost) {
-    this.cost = cost;
+  public void setPrice(Integer price) {
+    this.price = price;
   }
 
   @Override
