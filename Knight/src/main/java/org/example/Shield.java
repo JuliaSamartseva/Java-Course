@@ -5,6 +5,14 @@ public class Shield implements Equipment {
   private Integer price = 50;
   private Integer weight = 10;
 
+  public Shield() {}
+
+  public Shield(String description, Integer price, Integer weight) {
+    this.description = description;
+    this.price = price;
+    this.weight = weight;
+  }
+
   @Override
   public Integer getPrice() {
     return price;

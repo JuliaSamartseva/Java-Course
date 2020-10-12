@@ -5,6 +5,14 @@ public class BodyArmor implements Equipment {
   private Integer price = 150;
   private Integer weight = 60;
 
+  public BodyArmor() {}
+
+  public BodyArmor(String description, Integer price, Integer weight) {
+    this.description = description;
+    this.price = price;
+    this.weight = weight;
+  }
+
   @Override
   public Integer getPrice() {
     return price;

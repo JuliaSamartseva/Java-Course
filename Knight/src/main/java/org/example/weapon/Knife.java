@@ -6,6 +6,14 @@ public class Knife implements Weapon {
   private Integer price = 100;
   private Integer weight = 100;
 
+  public Knife() {}
+
+  public Knife(String name, Integer price, Integer weight) {
+    this.name = name;
+    this.price = price;
+    this.weight = weight;
+  }
+
   @Override
   public String getName() {
     return name;
