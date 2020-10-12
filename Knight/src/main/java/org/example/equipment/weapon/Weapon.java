@@ -1,6 +1,6 @@
-package org.example.weapon;
+package org.example.equipment.weapon;
 
-import org.example.Equipment;
+import org.example.equipment.Equipment;
 
 public interface Weapon extends Equipment {
   String getName();

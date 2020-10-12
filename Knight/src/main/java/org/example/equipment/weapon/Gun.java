@@ -1,14 +1,14 @@
-package org.example.weapon;
+package org.example.equipment.weapon;
 
-public class Knife implements Weapon {
+public class Gun implements Weapon {
 
-  private String name = "Knife";
-  private Integer price = 100;
-  private Integer weight = 100;
+  private String name = "Gun";
+  private Integer price = 200;
+  private Integer weight = 250;
 
-  public Knife() {}
+  public Gun() {}
 
-  public Knife(String name, Integer price, Integer weight) {
+  public Gun(String name, Integer price, Integer weight) {
     this.name = name;
     this.price = price;
     this.weight = weight;

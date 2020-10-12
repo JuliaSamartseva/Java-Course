@@ -1,13 +1,13 @@
-package org.example;
+package org.example.equipment;
 
-public class BodyArmor implements Equipment {
+public class Shield implements Equipment {
   private String description;
-  private Integer price = 150;
-  private Integer weight = 60;
+  private Integer price = 50;
+  private Integer weight = 10;
 
-  public BodyArmor() {}
+  public Shield() {}
 
-  public BodyArmor(String description, Integer price, Integer weight) {
+  public Shield(String description, Integer price, Integer weight) {
     this.description = description;
     this.price = price;
     this.weight = weight;

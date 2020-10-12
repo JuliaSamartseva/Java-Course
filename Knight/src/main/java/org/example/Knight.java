@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Optional;
-import org.example.weapon.Weapon;
+import org.example.equipment.BodyArmor;
+import org.example.equipment.Equipment;
+import org.example.equipment.Shield;
+import org.example.equipment.weapon.Weapon;
 
 public class Knight {
   private final String order;

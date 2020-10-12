@@ -6,10 +6,13 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import org.example.weapon.Gun;
-import org.example.weapon.Knife;
-import org.example.weapon.QualityUpgrade;
-import org.example.weapon.Weapon;
+import org.example.equipment.BodyArmor;
+import org.example.equipment.Equipment;
+import org.example.equipment.Shield;
+import org.example.equipment.weapon.Gun;
+import org.example.equipment.weapon.Knife;
+import org.example.equipment.weapon.QualityUpgrade;
+import org.example.equipment.weapon.Weapon;
 import org.junit.Test;
 
 public class AppTest {
