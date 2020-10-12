@@ -6,6 +6,14 @@ public class Gun implements Weapon {
   private Integer price = 200;
   private Integer weight = 250;
 
+  public Gun() {}
+
+  public Gun(String name, Integer price, Integer weight) {
+    this.name = name;
+    this.price = price;
+    this.weight = weight;
+  }
+
   @Override
   public String getName() {
     return name;
