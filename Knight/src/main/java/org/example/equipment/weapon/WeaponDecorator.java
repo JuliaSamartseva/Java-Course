@@ -1,4 +1,4 @@
-package org.example.weapon;
+package org.example.equipment.weapon;
 
 public class WeaponDecorator implements Weapon {
   Weapon weapon;
