@@ -3,43 +3,12 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="f993f5fc-535c-44fd-b93b-71b67f6846d3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Test.java" afterDir="false" />
-    </list>
+    <list default="true" id="43e36ef6-282d-4078-b2f8-c1d9b666ec07" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -48,122 +17,19 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectId" id="1ijEZl9hbVjt7Ghg5S7qUaIfz7A" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
+  <component name="ProjectId" id="1j11zveXzUYz8V25QGnVGBF29TR" />
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="google-java-format.settings" />
   </component>
-  <component name="RunManager">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.App" />
-      <module name="ClassDescription" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.App" />
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f993f5fc-535c-44fd-b93b-71b67f6846d3" name="Default Changelist" comment="" />
-      <created>1602412660838</created>
+      <changelist id="43e36ef6-282d-4078-b2f8-c1d9b666ec07" name="Default Changelist" comment="" />
+      <created>1602957049764</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1602412660838</updated>
+      <updated>1602957049764</updated>
     </task>
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="499" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1602439117678">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="499" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1602439117677" />
-    <state width="723" height="2" key="GridCell.Tab.0.bottom" timestamp="1602442788171">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="723" height="2" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1602442788171" />
-    <state width="723" height="2" key="GridCell.Tab.0.center" timestamp="1602442788171">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="723" height="2" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1602442788171" />
-    <state width="723" height="2" key="GridCell.Tab.0.left" timestamp="1602442788170">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="723" height="2" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1602442788170" />
-    <state width="723" height="2" key="GridCell.Tab.0.right" timestamp="1602442788171">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="723" height="2" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1602442788171" />
-    <state width="723" height="2" key="GridCell.Tab.1.bottom" timestamp="1602442788173">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="723" height="2" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1602442788173" />
-    <state width="723" height="2" key="GridCell.Tab.1.center" timestamp="1602442788172">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="723" height="2" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1602442788172" />
-    <state width="723" height="2" key="GridCell.Tab.1.left" timestamp="1602442788172">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="723" height="2" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1602442788172" />
-    <state width="723" height="2" key="GridCell.Tab.1.right" timestamp="1602442788172">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="723" height="2" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1602442788172" />
-    <state x="431" y="185" key="search.everywhere.popup" timestamp="1602441842018">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="431" y="185" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1602441842018" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/loader/CustomClassLoader.java</url>
-          <line>15</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/loader/CustomClassLoader.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
