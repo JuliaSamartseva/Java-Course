@@ -3,32 +3,37 @@ package org.example;
 import java.util.LinkedList;
 import java.util.Queue;
 
+// Producer-Consumer
+
 public class BlockingQueue<Type> {
-  private Queue<Type> queue = new LinkedList<Type>();
-  private int EMPTY = 0;
-  private int MAX_TASK_IN_QUEUE = -1;
+  private Queue<Type> queue = new LinkedList<>();
+  private int size;
 
   public BlockingQueue(int size) {
-    this.MAX_TASK_IN_QUEUE = size;
+    this.size = size;
   }
 
   public synchronized void enqueue(Type task) throws InterruptedException {
-    while (this.queue.size() == this.MAX_TASK_IN_QUEUE) {
+    while (queue.size() == size) {
       wait();
     }
-    if (this.queue.size() == EMPTY) {
+    if (queue.size() == 0) {
       notifyAll();
     }
-    this.queue.offer(task);
+    queue.offer(task);
   }
 
   public synchronized Type dequeue() throws InterruptedException {
-    while (this.queue.size() == EMPTY) {
+    while (queue.size() == 0) {
       wait();
     }
-    if (this.queue.size() == this.MAX_TASK_IN_QUEUE) {
+    if (queue.size() == size) {
       notifyAll();
     }
-    return this.queue.poll();
+    return queue.poll();
+  }
+
+  public int getCurrentSize() {
+    return queue.size();
   }
 }
