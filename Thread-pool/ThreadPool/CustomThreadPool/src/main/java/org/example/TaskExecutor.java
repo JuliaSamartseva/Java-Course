@@ -1,7 +1,11 @@
 package org.example;
 
+import java.util.logging.Logger;
+
 public class TaskExecutor implements Runnable {
   BlockingQueue<Runnable> queue;
+  private volatile boolean running = true;
+  private static final Logger log = Logger.getLogger(TaskExecutor.class.getName());
 
   public TaskExecutor(BlockingQueue<Runnable> queue) {
     this.queue = queue;
@@ -10,15 +14,19 @@ public class TaskExecutor implements Runnable {
   @Override
   public void run() {
     try {
-      while (true) {
+      while (running) {
         String name = Thread.currentThread().getName();
         Runnable task = queue.dequeue();
-        System.out.println("Task Started by Thread :" + name);
+        log.info("Started task by thread: " + name);
         task.run();
-        System.out.println("Task Finished by Thread :" + name);
+        log.info("Finished task by thread : " + name);
       }
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+  }
+
+  public void stopExecution() {
+    running = false;
   }
 }
