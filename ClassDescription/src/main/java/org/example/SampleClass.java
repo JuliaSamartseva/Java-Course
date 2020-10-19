@@ -1,6 +1,8 @@
 package org.example;
 
-class SampleClass {
+import java.io.Serializable;
+
+class SampleClass implements Serializable {
   public int variable;
   private final String finalVariable;
 
