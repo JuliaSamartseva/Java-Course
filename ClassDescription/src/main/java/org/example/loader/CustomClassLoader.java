@@ -4,30 +4,35 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Logger;
+import org.example.App;
 
 public class CustomClassLoader extends ClassLoader {
+  private static Logger log = Logger.getLogger(CustomClassLoader.class.getName());
+
   public CustomClassLoader(ClassLoader parent) {
     super(parent);
   }
 
   public Class loadClass(String name) throws ClassNotFoundException {
-    System.out.println("Class Loading Started for " + name);
-    return this.getClass(name);
+    log.info("Class loading started for " + name);
+    return getClass(name);
   }
 
   private Class getClass(String name) throws ClassNotFoundException {
     String file = name.replace('.', File.separatorChar) + ".class";
-    System.out.println("Name of File" + file);
-    Object var3 = null;
+    log.info("Name of loaded class: " + file);
+    if (file.startsWith("java"))
+      return App.class.getClassLoader().loadClass(name);
 
     try {
-      byte[] byteArr = this.loadClassData(file);
-      System.out.println("Size of byte array " + byteArr.length);
-      Class c = this.defineClass(name, byteArr, 0, byteArr.length);
-      this.resolveClass(c);
+      byte[] byteArr = loadClassData(file);
+      log.info("Size of byte array " + byteArr.length);
+      Class c = defineClass(name, byteArr, 0, byteArr.length);
+      resolveClass(c);
       return c;
-    } catch (IOException var5) {
-      var5.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
       return null;
     }
   }
