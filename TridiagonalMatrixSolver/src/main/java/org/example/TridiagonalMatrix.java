@@ -35,7 +35,9 @@ public class TridiagonalMatrix {
   }
 
   private boolean validateMatrix() {
-    for (int x = 0; x < matrix.length; x++)
+    for (int x = 0; x < matrix.length; x++) {
+      if (matrix.length != matrix[x].length) return false;
+
       for (int y = 0; y < matrix[x].length; y++) {
         double cell = matrix[x][y];
 
@@ -45,7 +47,7 @@ public class TridiagonalMatrix {
           if (cell != 0) return false;
         }
       }
-
+    }
     return true;
   }
 
