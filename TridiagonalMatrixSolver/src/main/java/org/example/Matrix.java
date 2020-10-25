@@ -17,8 +17,8 @@ public class Matrix {
       ++rows;
       Scanner colReader = new Scanner(input.nextLine());
       columns = 0;
-      while (colReader.hasNextInt()) {
-        colReader.nextInt();
+      while (colReader.hasNextDouble()) {
+        colReader.nextDouble();
         ++columns;
       }
     }
@@ -39,10 +39,10 @@ public class Matrix {
     int fCounter = 1;
     for (int i = 0; i < rows; ++i) {
       for (int j = 0; j < columns; ++j) {
-        if (input.hasNextInt()) {
+        if (input.hasNextDouble()) {
           /// Input the last column to the function.
-          if (j == columns - 1) function[fCounter++] = input.nextInt();
-          else matrix[i][j] = input.nextInt();
+          if (j == columns - 1) function[fCounter++] = input.nextDouble();
+          else matrix[i][j] = input.nextDouble();
         }
       }
     }
