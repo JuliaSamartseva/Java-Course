@@ -4,29 +4,45 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class TridiagonalMatrix {
+public class Matrix {
   double[][] matrix;
+  double[] function;
 
-  public TridiagonalMatrix(String path) throws FileNotFoundException {
+  public Matrix(String path) throws FileNotFoundException, IllegalArgumentException {
+
     Scanner input = new Scanner(new File(path));
     int rows = 0;
     int columns = 0;
     while (input.hasNextLine()) {
       ++rows;
       Scanner colReader = new Scanner(input.nextLine());
+      columns = 0;
       while (colReader.hasNextInt()) {
+        colReader.nextInt();
         ++columns;
       }
     }
-    matrix = new double[rows][columns];
+
+    if (rows != columns - 1)
+      throw new IllegalArgumentException(
+          "The matrix is not squared. Rows "
+              + Integer.toString(rows)
+              + " Columns "
+              + Integer.toString(columns));
+    matrix = new double[rows][columns - 1];
+    function = new double[rows + 1];
 
     input.close();
 
     input = new Scanner(new File(path));
+
+    int fCounter = 1;
     for (int i = 0; i < rows; ++i) {
       for (int j = 0; j < columns; ++j) {
         if (input.hasNextInt()) {
-          matrix[i][j] = input.nextInt();
+          /// Input the last column to the function.
+          if (j == columns - 1) function[fCounter++] = input.nextInt();
+          else matrix[i][j] = input.nextInt();
         }
       }
     }
@@ -53,5 +69,9 @@ public class TridiagonalMatrix {
 
   public double[][] getMatrix() {
     return matrix;
+  }
+
+  public double[] getFunction() {
+    return function;
   }
 }
