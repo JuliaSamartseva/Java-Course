@@ -27,7 +27,7 @@ public class ClassDescription {
 
   public void printMethodsInformation() {
     System.out.println("\nMethods of the class:");
-    for (Method method : cls.getDeclaredMethods()) {
+    for (Method method : cls.getMethods()) {
       System.out.println(method);
     }
   }

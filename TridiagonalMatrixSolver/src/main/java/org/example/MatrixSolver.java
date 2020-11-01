@@ -30,7 +30,7 @@ public class MatrixSolver {
     left.join();
     right.join();
 
-    num = (int) Math.floor(n / 2);
+    num = (int) Math.floor((n + 1) / 2);
 
     result[num] = (alpha[num] * psi[num] + betta[num]) / (1 - alpha[num] * ksi[num]);
     result[num + 1] = (ksi[num + 1] * betta[num + 1] + psi[num + 1]) / (1 - ksi[num + 1] * alpha[num + 1]);

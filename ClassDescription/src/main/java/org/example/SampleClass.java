@@ -1,8 +1,10 @@
 package org.example;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Queue;
 
-class SampleClass implements Serializable {
+class SampleClass extends ArrayList {
   public int variable;
   private final String finalVariable;
 

@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.concurrent.locks.Lock;
+
 public class ReentrantLock implements CustomLock {
   private long owner;
   private int holdCount = 0;
@@ -39,10 +41,12 @@ public class ReentrantLock implements CustomLock {
     if (holdCount == 0 || owner != Thread.currentThread().getId())
       throw new IllegalMonitorStateException();
     holdCount--;
-    owner = 0;
 
     /// The lock is released. One waiting thread is notified.
-    if (holdCount == 0) notify();
+    if (holdCount == 0) {
+      owner = 0;
+      notify();
+    }
   }
 
   /** Acquires the lock only if it is not held by another thread at the time of invocation. */
@@ -55,5 +59,9 @@ public class ReentrantLock implements CustomLock {
     } else {
       return false;
     }
+  }
+
+  public synchronized boolean isHeldByCurrentThread() {
+    return owner == Thread.currentThread().getId();
   }
 }
