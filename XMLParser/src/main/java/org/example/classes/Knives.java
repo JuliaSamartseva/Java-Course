@@ -19,7 +19,7 @@ public class Knives implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @XmlElement(required = true)
-  protected List<Knife> knife;
+  protected List<Knife> knives;
 
   /**
    * Gets the value of the knife property.
@@ -36,10 +36,19 @@ public class Knives implements Serializable {
    *
    * <p>Objects of the following type(s) are allowed in the list {@link Knife }
    */
-  public List<Knife> getKnife() {
-    if (knife == null) {
-      knife = new ArrayList<Knife>();
+  public List<Knife> getKnives() {
+    if (knives == null) {
+      knives = new ArrayList<Knife>();
     }
-    return this.knife;
+    return this.knives;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder result = new StringBuilder();
+    for (Knife knife : knives) {
+      result.append(knife);
+    }
+    return result.toString();
   }
 }
