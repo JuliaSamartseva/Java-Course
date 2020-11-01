@@ -10,8 +10,7 @@ import javax.xml.validation.SchemaFactory;
 public final class Validator {
   public static boolean validateXMLSchema(String xsdPath, String xmlPath) {
     try {
-      SchemaFactory factory =
-          SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+      SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
       Schema schema = factory.newSchema(new File(xsdPath));
       javax.xml.validation.Validator validator = schema.newValidator();
       validator.validate(new StreamSource(new File(xmlPath)));
