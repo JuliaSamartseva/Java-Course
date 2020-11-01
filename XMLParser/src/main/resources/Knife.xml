@@ -1,94 +1,94 @@
 <?xml version="1.0"?>
 <knives>
   <knife id="1">
-    <type>Knife</type>
     <handy>one</handy>
+    <isValuable>false</isValuable>
     <origin>USA</origin>
+    <type>Knife</type>
     <visualCharacteristics>
-      <length unit="cm">18</length>
-      <width unit="mm">10</width>
       <bladeMaterial>steel</bladeMaterial>
       <handleMaterial>wood</handleMaterial>
       <hasBloodStream>true</hasBloodStream>
+      <length unit="cm">18</length>
+      <width unit="mm">10</width>
     </visualCharacteristics>
-    <isValuable>false</isValuable>
   </knife>
   <knife id="2">
-    <type>Dagger</type>
     <handy>two</handy>
+    <isValuable>true</isValuable>
     <origin>China</origin>
+    <type>Dagger</type>
     <visualCharacteristics>
-      <length unit="cm">16</length>
-      <width unit="mm">11</width>
       <bladeMaterial>iron</bladeMaterial>
       <handleMaterial>plastic</handleMaterial>
       <hasBloodStream>true</hasBloodStream>
+      <length unit="cm">16</length>
+      <width unit="mm">11</width>
     </visualCharacteristics>
-    <isValuable>true</isValuable>
   </knife>
   <knife id="3">
-    <type>Dagger</type>
     <handy>two</handy>
+    <isValuable>true</isValuable>
     <origin>Germany</origin>
+    <type>Dagger</type>
     <visualCharacteristics>
-      <length unit="cm">19</length>
-      <width unit="mm">10</width>
       <bladeMaterial>iron</bladeMaterial>
       <handleMaterial>metal</handleMaterial>
       <hasBloodStream>false</hasBloodStream>
+      <length unit="cm">19</length>
+      <width unit="mm">10</width>
     </visualCharacteristics>
-    <isValuable>true</isValuable>
   </knife>
   <knife id="4">
-    <type>Saber</type>
     <handy>one</handy>
+    <isValuable>false</isValuable>
     <origin>Japan</origin>
+    <type>Saber</type>
     <visualCharacteristics>
-      <length unit="cm">18</length>
-      <width unit="mm">11</width>
       <bladeMaterial>copper</bladeMaterial>
       <handleMaterial>metal</handleMaterial>
       <hasBloodStream>false</hasBloodStream>
+      <length unit="cm">18</length>
+      <width unit="mm">11</width>
     </visualCharacteristics>
-    <isValuable>false</isValuable>
   </knife>
   <knife id="5">
-    <type>Knife</type>
     <handy>one</handy>
+    <isValuable>true</isValuable>
     <origin>Serbia</origin>
+    <type>Knife</type>
     <visualCharacteristics>
-      <length unit="cm">30</length>
-      <width unit="mm">10</width>
       <bladeMaterial>steel</bladeMaterial>
       <handleMaterial>plastic</handleMaterial>
       <hasBloodStream>true</hasBloodStream>
+      <length unit="cm">30</length>
+      <width unit="mm">10</width>
     </visualCharacteristics>
-    <isValuable>true</isValuable>
   </knife>
   <knife id="6">
-    <type>Dagger</type>
     <handy>two</handy>
+    <isValuable>false</isValuable>
     <origin>Spain</origin>
+    <type>Dagger</type>
     <visualCharacteristics>
-      <length unit="cm">32</length>
-      <width unit="mm">15</width>
       <bladeMaterial>copper</bladeMaterial>
       <handleMaterial>wood</handleMaterial>
       <hasBloodStream>true</hasBloodStream>
+      <length unit="cm">32</length>
+      <width unit="mm">15</width>
     </visualCharacteristics>
-    <isValuable>false</isValuable>
   </knife>
   <knife id="7">
-    <type>Dagger</type>
     <handy>two</handy>
+    <isValuable>true</isValuable>
     <origin>Russia</origin>
+    <type>Dagger</type>
     <visualCharacteristics>
-      <length unit="cm">19</length>
-      <width unit="mm">13</width>
       <bladeMaterial>iron</bladeMaterial>
       <handleMaterial>plastic</handleMaterial>
       <hasBloodStream>false</hasBloodStream>
+      <length unit="cm">19</length>
+      <width unit="mm">13</width>
     </visualCharacteristics>
-    <isValuable>true</isValuable>
   </knife>
 </knives>

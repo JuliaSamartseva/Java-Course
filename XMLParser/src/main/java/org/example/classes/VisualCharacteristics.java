@@ -112,6 +112,22 @@ public class VisualCharacteristics implements Serializable {
     this.hasBloodStream = value;
   }
 
+  @Override
+  public String toString() {
+    return "\n  Length: "
+        + length.getValue()
+        + length.getUnit()
+        + "\n  Width: "
+        + width.getValue()
+        + width.getUnit()
+        + "\n  Blade material: "
+        + bladeMaterial
+        + "\n  Handle material: "
+        + handleMaterial
+        + "\n  Blood stream: "
+        + hasBloodStream;
+  }
+
   @XmlAccessorType(XmlAccessType.FIELD)
   @XmlType(
       name = "",
@@ -200,21 +216,5 @@ public class VisualCharacteristics implements Serializable {
     public void setUnit(String value) {
       this.unit = value;
     }
-  }
-
-  @Override
-  public String toString() {
-    return "\n  Length: "
-        + length.getValue()
-        + length.getUnit()
-        + "\n  Width: "
-        + width.getValue()
-        + width.getUnit()
-        + "\n  Blade material: "
-        + bladeMaterial
-        + "\n  Handle material: "
-        + handleMaterial
-        + "\n  Blood stream: "
-        + hasBloodStream;
   }
 }

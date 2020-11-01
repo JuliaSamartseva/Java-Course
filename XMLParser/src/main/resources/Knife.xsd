@@ -1,13 +1,15 @@
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+  elementFormDefault="qualified">
 
   <xs:element name="knives">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="knife" maxOccurs="unbounded">
+        <xs:element maxOccurs="unbounded" name="knife">
 
           <xs:complexType>
+            <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
             <xs:sequence>
-              <xs:element type="xs:string" name="type"/>
+              <xs:element name="type" type="xs:string"/>
 
               <xs:element name="handy">
                 <xs:simpleType>
@@ -17,7 +19,7 @@
                 </xs:simpleType>
               </xs:element>
 
-              <xs:element type="xs:string" name="origin"/>
+              <xs:element name="origin" type="xs:string"/>
 
               <xs:element name="visualCharacteristics">
                 <xs:complexType>
@@ -27,7 +29,7 @@
                       <xs:complexType>
                         <xs:simpleContent>
                           <xs:extension base="xs:int">
-                            <xs:attribute type="xs:string" name="unit" fixed="cm"/>
+                            <xs:attribute fixed="cm" name="unit" type="xs:string"/>
                           </xs:extension>
                         </xs:simpleContent>
                       </xs:complexType>
@@ -37,7 +39,7 @@
                       <xs:complexType>
                         <xs:simpleContent>
                           <xs:extension base="xs:int">
-                            <xs:attribute type="xs:string" name="unit" fixed="mm"/>
+                            <xs:attribute fixed="mm" name="unit" type="xs:string"/>
                           </xs:extension>
                         </xs:simpleContent>
                       </xs:complexType>
@@ -59,16 +61,15 @@
                       </xs:simpleType>
                     </xs:element>
 
-                    <xs:element type="xs:boolean" name="hasBloodStream"/>
+                    <xs:element name="hasBloodStream" type="xs:boolean"/>
 
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
 
-              <xs:element type="xs:boolean" name="isValuable"/>
+              <xs:element name="isValuable" type="xs:boolean"/>
 
             </xs:sequence>
-            <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
           </xs:complexType>
 
         </xs:element>

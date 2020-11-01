@@ -47,54 +47,35 @@ public class CustomDOMParser {
           Element eElement = (Element) nNode;
           knife.setId(Integer.parseInt(eElement.getAttribute("id")));
 
-          knife.setType(eElement
-              .getElementsByTagName(TYPE)
-              .item(0)
-              .getTextContent());
+          knife.setType(eElement.getElementsByTagName(TYPE).item(0).getTextContent());
 
-          knife.setHandy(eElement
-              .getElementsByTagName(HANDY)
-              .item(0)
-              .getTextContent());
+          knife.setHandy(eElement.getElementsByTagName(HANDY).item(0).getTextContent());
 
-          knife.setOrigin(eElement
-              .getElementsByTagName(ORIGIN)
-              .item(0)
-              .getTextContent());
+          knife.setOrigin(eElement.getElementsByTagName(ORIGIN).item(0).getTextContent());
 
           Length length = new Length();
-          length.setValue(Integer.parseInt(eElement
-              .getElementsByTagName(LENGTH)
-              .item(0)
-              .getTextContent()));
+          length.setValue(
+              Integer.parseInt(eElement.getElementsByTagName(LENGTH).item(0).getTextContent()));
           visualCharacteristics.setLength(length);
 
           Width width = new Width();
-          width.setValue(Integer.parseInt(eElement
-              .getElementsByTagName(WIDTH)
-              .item(0)
-              .getTextContent()));
+          width.setValue(
+              Integer.parseInt(eElement.getElementsByTagName(WIDTH).item(0).getTextContent()));
           visualCharacteristics.setWidth(width);
 
-          visualCharacteristics.setBladeMaterial(eElement
-              .getElementsByTagName(BLADEMATERIAL)
-              .item(0)
-              .getTextContent());
+          visualCharacteristics.setBladeMaterial(
+              eElement.getElementsByTagName(BLADEMATERIAL).item(0).getTextContent());
 
-          visualCharacteristics.setHandleMaterial(eElement
-              .getElementsByTagName(HANDLEMATERIAL)
-              .item(0)
-              .getTextContent());
+          visualCharacteristics.setHandleMaterial(
+              eElement.getElementsByTagName(HANDLEMATERIAL).item(0).getTextContent());
 
-          visualCharacteristics.setHasBloodStream(Boolean.parseBoolean(eElement
-              .getElementsByTagName(BLOODSTREAM)
-              .item(0)
-              .getTextContent()));
+          visualCharacteristics.setHasBloodStream(
+              Boolean.parseBoolean(
+                  eElement.getElementsByTagName(BLOODSTREAM).item(0).getTextContent()));
 
-          knife.setIsValuable(Boolean.parseBoolean(eElement
-              .getElementsByTagName(VALUABLE)
-              .item(0)
-              .getTextContent()));
+          knife.setIsValuable(
+              Boolean.parseBoolean(
+                  eElement.getElementsByTagName(VALUABLE).item(0).getTextContent()));
 
           knife.setVisualCharacteristics(visualCharacteristics);
         }
