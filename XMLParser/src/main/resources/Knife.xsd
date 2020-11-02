@@ -7,7 +7,6 @@
         <xs:element maxOccurs="unbounded" name="knife">
 
           <xs:complexType>
-            <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
             <xs:sequence>
               <xs:element name="type" type="xs:string"/>
 
@@ -70,6 +69,7 @@
               <xs:element name="isValuable" type="xs:boolean"/>
 
             </xs:sequence>
+            <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
           </xs:complexType>
 
         </xs:element>

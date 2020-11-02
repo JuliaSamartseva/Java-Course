@@ -16,7 +16,6 @@
   <knife id="2">
     <type>Dagger</type>
     <handy>two</handy>
-    <origin>China</origin>
     <visualCharacteristics>
       <length unit="cm">16</length>
       <width unit="mm">11</width>
@@ -26,7 +25,7 @@
     </visualCharacteristics>
     <isValuable>true</isValuable>
   </knife>
-  <knife id="3">
+  <knife id="D">
     <type>Dagger</type>
     <handy>two</handy>
     <origin>Germany</origin>
