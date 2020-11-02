@@ -6,7 +6,7 @@
     <origin>USA</origin>
     <visualCharacteristics>
       <length unit="cm">18</length>
-      <width unit="mm">10</width>
+      <width unit="mm">9</width>
       <bladeMaterial>steel</bladeMaterial>
       <handleMaterial>wood</handleMaterial>
       <hasBloodStream>true</hasBloodStream>

@@ -1,9 +1,11 @@
 C:\Julia\University\OOP\Java-course\XMLParser\src\main\java\org\example\classes\Knife.java
 C:\Julia\University\OOP\Java-course\XMLParser\src\main\java\org\example\App.java
 C:\Julia\University\OOP\Java-course\XMLParser\src\main\java\org\example\classes\Knives.java
+C:\Julia\University\OOP\Java-course\XMLParser\src\main\java\org\example\classes\VisualCharacteristics.java
 C:\Julia\University\OOP\Java-course\XMLParser\target\generated-sources\xjc\com\common\dto\Adapter1.java
 C:\Julia\University\OOP\Java-course\XMLParser\target\generated-sources\xjc\com\common\dto\ObjectFactory.java
 C:\Julia\University\OOP\Java-course\XMLParser\target\generated-sources\xjc\com\common\dto\Knives.java
-C:\Julia\University\OOP\Java-course\XMLParser\target\generated-sources\xjc\com\common\dto\package-info.java
+C:\Julia\University\OOP\Java-course\XMLParser\src\main\java\org\example\parsers\CustomStAXParser.java
 C:\Julia\University\OOP\Java-course\XMLParser\src\main\java\org\example\parsers\CustomSAXParser.java
 C:\Julia\University\OOP\Java-course\XMLParser\src\main\java\org\example\validator\Validator.java
+C:\Julia\University\OOP\Java-course\XMLParser\src\main\java\org\example\parsers\CustomDOMParser.java
