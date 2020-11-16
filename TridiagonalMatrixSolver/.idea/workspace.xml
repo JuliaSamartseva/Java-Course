@@ -22,21 +22,23 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9bbd644b-e5c8-4495-a026-1ab9dcea4883" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../ClassDescription/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ClassDescription/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ClassDescription/src/main/java/org/example/ClassDescription.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ClassDescription/src/main/java/org/example/ClassDescription.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ClassDescription/src/main/java/org/example/SampleClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ClassDescription/src/main/java/org/example/SampleClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ReentrantLock/src/main/java/org/example/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ReentrantLock/src/main/java/org/example/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ReentrantLock/src/main/java/org/example/CustomLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ReentrantLock/src/main/java/org/example/CustomLock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ReentrantLock/src/main/java/org/example/ReentrantLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ReentrantLock/src/main/java/org/example/ReentrantLock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MatrixSolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MatrixSolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/matrix.txt" afterDir="false" />
+    <list default="true" id="e807467a-9cc3-4727-aabc-27e348a1a14f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/LockFreeSkipList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/AppTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -48,44 +50,45 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectId" id="1jN1XlExAxzmmYvmZV9P9IdpTsr" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1kK8D4HZMLaIVxvhrWwxRxSNz1V" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="settings.editor.selected.configurable" value="google-java-format.settings" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.App" />
-      <module name="TridiagonalMatrixSolver" />
+    <configuration name="AppTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SkipListFreeLock" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.example.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.AppTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.App" />
+        <item itemvalue="JUnit.AppTest" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9bbd644b-e5c8-4495-a026-1ab9dcea4883" name="Default Changelist" comment="" />
-      <created>1603629801208</created>
+      <changelist id="e807467a-9cc3-4727-aabc-27e348a1a14f" name="Default Changelist" comment="" />
+      <created>1605437799936</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1603629801208</updated>
+      <updated>1605437799936</updated>
     </task>
     <servers />
   </component>
@@ -102,21 +105,21 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1493" height="51" key="GridCell.Tab.0.bottom" timestamp="1603715739763">
+    <state width="723" height="44" key="GridCell.Tab.0.bottom" timestamp="1605441734507">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="51" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1603715739763" />
-    <state width="1493" height="51" key="GridCell.Tab.0.center" timestamp="1603715739763">
+    <state width="723" height="44" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1605441734507" />
+    <state width="723" height="44" key="GridCell.Tab.0.center" timestamp="1605441734507">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="51" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1603715739763" />
-    <state width="1493" height="51" key="GridCell.Tab.0.left" timestamp="1603715739763">
+    <state width="723" height="44" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1605441734507" />
+    <state width="723" height="44" key="GridCell.Tab.0.left" timestamp="1605441734507">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="51" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1603715739763" />
-    <state width="1493" height="51" key="GridCell.Tab.0.right" timestamp="1603715739763">
+    <state width="723" height="44" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1605441734507" />
+    <state width="723" height="44" key="GridCell.Tab.0.right" timestamp="1605441734507">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="51" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1603715739763" />
+    <state width="723" height="44" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1605441734507" />
   </component>
 </project>
