@@ -22,23 +22,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e807467a-9cc3-4727-aabc-27e348a1a14f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/LockFreeSkipList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/AppTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="885cf40c-46a4-43d0-9607-f27e747e2d74" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -50,45 +38,24 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectId" id="1kK8D4HZMLaIVxvhrWwxRxSNz1V" />
+  <component name="ProjectId" id="1jC5vIfGaDneK4seNPLbsWbzjmX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-  </component>
-  <component name="RunManager">
-    <configuration name="AppTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SkipListFreeLock" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example" />
-      <option name="MAIN_CLASS_NAME" value="org.example.AppTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JUnit.AppTest" />
-      </list>
-    </recent_temporary>
+    <property name="settings.editor.selected.configurable" value="google-java-format.settings" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e807467a-9cc3-4727-aabc-27e348a1a14f" name="Default Changelist" comment="" />
-      <created>1605437799936</created>
+      <changelist id="885cf40c-46a4-43d0-9607-f27e747e2d74" name="Default Changelist" comment="" />
+      <created>1603295462777</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1605437799936</updated>
+      <updated>1603295462777</updated>
     </task>
     <servers />
   </component>
@@ -105,21 +72,21 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="723" height="44" key="GridCell.Tab.0.bottom" timestamp="1605441734507">
+    <state width="1074" height="221" key="GridCell.Tab.0.bottom" timestamp="1603308991893">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="723" height="44" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1605441734507" />
-    <state width="723" height="44" key="GridCell.Tab.0.center" timestamp="1605441734507">
+    <state width="1074" height="221" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1603308991893" />
+    <state width="1074" height="221" key="GridCell.Tab.0.center" timestamp="1603308991893">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="723" height="44" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1605441734507" />
-    <state width="723" height="44" key="GridCell.Tab.0.left" timestamp="1605441734507">
+    <state width="1074" height="221" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1603308991893" />
+    <state width="1074" height="221" key="GridCell.Tab.0.left" timestamp="1603308991892">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="723" height="44" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1605441734507" />
-    <state width="723" height="44" key="GridCell.Tab.0.right" timestamp="1605441734507">
+    <state width="1074" height="221" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1603308991892" />
+    <state width="1074" height="221" key="GridCell.Tab.0.right" timestamp="1603308991893">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="723" height="44" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1605441734507" />
+    <state width="1074" height="221" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1603308991893" />
   </component>
 </project>
