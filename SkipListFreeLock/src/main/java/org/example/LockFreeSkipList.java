@@ -16,7 +16,7 @@ public class LockFreeSkipList {
     }
   }
 
-  public void add(int item) {
+  public boolean add(int item) {
     int topLevel = randomLevel(MAX_LEVEL);
     int bottomLevel = 0;
     Node[] preds = new Node[MAX_LEVEL + 1];
@@ -46,9 +46,9 @@ public class LockFreeSkipList {
             find(item, preds, succs);
           }
         }
-        return;
+        return true;
       } else {
-        return;
+        return false;
       }
     }
   }

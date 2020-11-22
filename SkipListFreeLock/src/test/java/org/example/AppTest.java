@@ -8,14 +8,14 @@ import org.junit.Test;
 
 public class AppTest {
   @Test
-  public void testConcurrentAdd() throws InterruptedException {
+  public void testConcurrentAddAndRemoveInTwoThreads() throws InterruptedException {
     final int size = 101;
     final LockFreeSkipList list = new LockFreeSkipList();
     Thread thread1 = new Thread(new Runnable() {
       @Override
       public void run() {
         for (int i = 0; i < size; i += 2)
-        list.add(i);
+          assertTrue(list.add(i));
       }
     });
 
@@ -23,7 +23,7 @@ public class AppTest {
       @Override
       public void run() {
         for (int i = 1; i < size; i += 2)
-          list.add(i);
+          assertTrue(list.add(i));
       }
     });
 
@@ -37,6 +37,29 @@ public class AppTest {
       assertTrue(list.contains(i));
       list.remove(i);
       assertFalse(list.contains(i));
+    }
+  }
+
+  @Test
+  public void testAddRemoveInOneThread() throws InterruptedException {
+    final int size = 100;
+    final LockFreeSkipList list = new LockFreeSkipList();
+
+    for (int i = 0; i < size; i++)
+      assertTrue(list.add(i));
+
+    for (int i = 1; i < size; i += 2) {
+      assertTrue(list.contains(i));
+      assertTrue(list.remove(i));
+      assertFalse(list.contains(i));
+      assertTrue(list.contains(i - 1));
+    }
+    for (int i = 0; i < size; i += 2) {
+      assertTrue(list.contains(i));
+      assertTrue(list.remove(i));
+      assertFalse(list.contains(i));
+      assertFalse(list.remove(i + 1));
+      assertFalse(list.contains(i + 1));
     }
   }
 
