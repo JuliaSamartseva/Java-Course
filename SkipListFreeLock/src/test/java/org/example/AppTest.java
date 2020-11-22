@@ -10,7 +10,7 @@ public class AppTest {
   @Test
   public void testConcurrentAdd() throws InterruptedException {
     final int size = 101;
-    final LockFreeSkipList<Integer> list = new LockFreeSkipList<>();
+    final LockFreeSkipList list = new LockFreeSkipList();
     Thread thread1 = new Thread(new Runnable() {
       @Override
       public void run() {
@@ -39,4 +39,5 @@ public class AppTest {
       assertFalse(list.contains(i));
     }
   }
+
 }

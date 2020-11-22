@@ -3,35 +3,35 @@ package org.example;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicMarkableReference;
 
-public class LockFreeSkipList<T> {
-  static final int MAX_LEVEL = 10;
-  final Node<T> head = new Node<T>(Integer.MIN_VALUE);
-  final Node<T> tail = new Node<T>(Integer.MAX_VALUE);
-  Random rand;
+public class LockFreeSkipList {
+  private static final int MAX_LEVEL = 10;
+  private final Node head = new Node(Integer.MIN_VALUE);
+  private final Node tail = new Node(Integer.MAX_VALUE);
+  private final Random rand;
 
   public LockFreeSkipList() {
     rand = new Random();
     for (int i = 0; i < head.next.length; i++) {
-      head.next[i] = new AtomicMarkableReference<Node<T>>(tail, false);
+      head.next[i] = new AtomicMarkableReference<>(tail, false);
     }
   }
 
-  public void add(T item) {
+  public void add(int item) {
     int topLevel = randomLevel(MAX_LEVEL);
     int bottomLevel = 0;
-    Node<T>[] preds = (Node<T>[]) new Node[MAX_LEVEL + 1];
-    Node<T>[] succs = (Node<T>[]) new Node[MAX_LEVEL + 1];
+    Node[] preds = new Node[MAX_LEVEL + 1];
+    Node[] succs = new Node[MAX_LEVEL + 1];
 
     while (true) {
       boolean found = find(item, preds, succs);
-      if (!found) {
-        Node<T> newNode = new Node<T>(item, topLevel);
+      if (!found) { // if the node already exists, we don't add it
+        Node newNode = new Node(item, topLevel);
         for (int level = bottomLevel; level <= topLevel; level++) {
-          Node<T> succ = succs[level];
+          Node succ = succs[level];
           newNode.next[level].set(succ, false);
         }
-        Node<T> succ = succs[bottomLevel];
-        Node<T> pred = preds[bottomLevel];
+        Node succ = succs[bottomLevel];
+        Node pred = preds[bottomLevel];
         newNode.next[bottomLevel].set(succ, false);
 
         if (!pred.next[bottomLevel].compareAndSet(succ, newNode, false, false)) continue;
@@ -53,17 +53,17 @@ public class LockFreeSkipList<T> {
     }
   }
 
-  boolean remove(T x) {
+  boolean remove(int x) {
     int bottomLevel = 0;
-    Node<T>[] preds = (Node<T>[]) new Node[MAX_LEVEL + 1];
-    Node<T>[] succs = (Node<T>[]) new Node[MAX_LEVEL + 1];
-    Node<T> succ;
+    Node[] preds = (Node[]) new Node[MAX_LEVEL + 1];
+    Node[] succs = (Node[]) new Node[MAX_LEVEL + 1];
+    Node succ;
     while (true) {
       boolean found = find(x, preds, succs);
       if (!found) {
         return false;
       } else {
-        Node<T> nodeToRemove = succs[bottomLevel];
+        Node nodeToRemove = succs[bottomLevel];
         for (int level = nodeToRemove.topLevel; level >= bottomLevel + 1; level--) {
           boolean[] marked = {false};
           succ = nodeToRemove.next[level].get(marked);
@@ -86,11 +86,12 @@ public class LockFreeSkipList<T> {
     }
   }
 
-  boolean contains(T x) {
+  boolean contains(int x) {
     int bottomLevel = 0;
-    int v = x.hashCode();
     boolean[] marked = {false};
-    Node<T> pred = head, curr = null, succ = null;
+    Node pred = head;
+    Node curr = null;
+    Node succ = null;
     for (int level = MAX_LEVEL; level >= bottomLevel; level--) {
       curr = pred.next[level].getReference();
       while (true) {
@@ -99,7 +100,7 @@ public class LockFreeSkipList<T> {
           curr = pred.next[level].getReference();
           succ = curr.next[level].get(marked);
         }
-        if (curr.key < v) {
+        if (curr.value < x) {
           pred = curr;
           curr = succ;
         } else {
@@ -107,15 +108,14 @@ public class LockFreeSkipList<T> {
         }
       }
     }
-    return (curr.key == v);
+    return (curr.value == x);
   }
 
-  private boolean find(T item, Node<T>[] preds, Node<T>[] succs) {
+  private boolean find(int item, Node[] preds, Node[] succs) {
     int bottomLevel = 0;
-    int key = item.hashCode();
     boolean[] marked = {false};
-    boolean snip;
-    Node<T> pred = null, curr = null, succ = null;
+    boolean success;
+    Node pred = null, curr = null, succ = null;
     retry:
     while (true) {
       pred = head;
@@ -124,34 +124,31 @@ public class LockFreeSkipList<T> {
         while (true) {
           succ = curr.next[level].get(marked);
           while (marked[0]) {
-            snip = pred.next[level].compareAndSet(curr, succ, false, false);
-            if (!snip) continue retry;
+            success = pred.next[level].compareAndSet(curr, succ, false, false);
+            if (!success) continue retry;
 
             curr = pred.next[level].getReference();
             succ = curr.next[level].get(marked);
           }
-          if (curr.key < key) {
+          if (curr.value < item) {
             pred = curr;
             curr = succ;
-          } else {
-            break;
-          }
+          } else break;
         }
         preds[level] = pred;
         succs[level] = curr;
       }
-      return (curr.key == key);
+      return (curr.value == item);
     }
   }
 
   private int randomLevel(int max) {
     int level = 0;
-    while (level < max){
+    while (level < max) {
       int val = rand.nextInt() % 2;
-      if (val == 1){
+      if (val == 1) {
         level++;
-      }
-      else{
+      } else {
         return level;
       }
     }
