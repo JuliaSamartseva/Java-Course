@@ -11,16 +11,48 @@ public class Grid {
   private int columnsNumber;
   private int rowsNumber;
 
+  private Cell playerLocation;
+  private Cell exitLocation;
+
   public Grid(int rows, int columns) {
     columnsNumber = columns;
     rowsNumber = rows;
-    cells = new Cell[rowsNumber][columnsNumber];
+    cells = initialiseCells();
+    generateLabyrinth();
+
+    playerLocation = cells[0][0];
+    exitLocation = cells[rowsNumber - 1] [columnsNumber - 1];
+  }
+
+  public void movePlayer(Direction direction) {
+    switch (direction) {
+      case UP:
+        if (!playerLocation.top)
+          playerLocation = cells[playerLocation.row - 1][playerLocation.column];
+        break;
+      case DOWN:
+        if (!playerLocation.bottom)
+          playerLocation = cells[playerLocation.row + 1][playerLocation.column];
+        break;
+      case LEFT:
+        if (!playerLocation.left)
+          playerLocation = cells[playerLocation.row][playerLocation.column - 1];
+        break;
+      case RIGHT:
+        if (!playerLocation.right)
+          playerLocation = cells[playerLocation.row][playerLocation.column + 1];
+        break;
+    }
+  }
+
+  private Cell[][] initialiseCells() {
+    Cell[][] result = new Cell[rowsNumber][columnsNumber];
     for (int i = 0; i < rowsNumber; i++) {
       for (int j = 0; j < columnsNumber; j++) {
-        cells[i][j] = new Cell(i, j);
+        result[i][j] = new Cell(i, j);
       }
     }
-    generateLabyrinth();
+    return result;
   }
 
   private void generateLabyrinth() {
@@ -80,6 +112,14 @@ public class Grid {
     } else return null;
   }
 
+  public Cell getPlayerLocation() {
+    return playerLocation;
+  }
+
+  public Cell getExitLocation() {
+    return exitLocation;
+  }
+
   public int getColumnsNumber() {
     return columnsNumber;
   }
@@ -110,8 +150,8 @@ public class Grid {
     public boolean top = true;
     public boolean bottom = true;
 
-    private int row;
-    private int column;
+    public int row;
+    public int column;
 
     public Cell(int row, int column) {
       this.row = row;
