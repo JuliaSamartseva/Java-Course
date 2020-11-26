@@ -15,9 +15,9 @@ import com.example.labyrinth.logic.Grid;
 
 public class LabyrinthView extends View {
   private Paint painter;
-  private static final int WALL_WIDTH = 4;
-  private static final int ROWS = 8;
-  private static final int COLUMNS = 15;
+  private static final int WALL_WIDTH = 5;
+  private static final int ROWS = 15;
+  private static final int COLUMNS = 8;
   private Grid grid;
 
   public LabyrinthView(Context context, @Nullable AttributeSet attrs) {
@@ -33,23 +33,22 @@ public class LabyrinthView extends View {
     super.onDraw(canvas);
     int cellSize = calculateCellSize();
 
-    canvas.drawColor(Color.WHITE);
     int heightMargin = calculateHeightMargin(cellSize);
     int widthMargin = calculateWidthMargin(cellSize);
 
-    canvas.translate(heightMargin, widthMargin);
-    for (int i = 0; i < grid.getRowsNumber(); i++) {
-      for (int j = 0; j < grid.getColumnsNumber(); j++) {
-        if (grid.getCells()[i][j].top)
-          canvas.drawLine(i * cellSize, j * cellSize, (i + 1) * cellSize, j * cellSize, painter);
-        if (grid.getCells()[i][j].bottom)
+    canvas.translate(widthMargin, heightMargin);
+    for (int row = 0; row < grid.getRowsNumber(); row++) {
+      for (int column = 0; column < grid.getColumnsNumber(); column++) {
+        if (grid.getCells()[row][column].top)
+          canvas.drawLine(column * cellSize, row * cellSize, (column + 1) * cellSize, row * cellSize, painter);
+        if (grid.getCells()[row][column].bottom)
           canvas.drawLine(
-              i * cellSize, (j + 1) * cellSize, (i + 1) * cellSize, (j + 1) * cellSize, painter);
-        if (grid.getCells()[i][j].left)
-          canvas.drawLine(i * cellSize, j * cellSize, i * cellSize, (j + 1) * cellSize, painter);
-        if (grid.getCells()[i][j].right)
+              column * cellSize, (row + 1) * cellSize, (column + 1) * cellSize, (row + 1) * cellSize, painter);
+        if (grid.getCells()[row][column].left)
+          canvas.drawLine(column * cellSize, row * cellSize, column * cellSize, (row + 1) * cellSize, painter);
+        if (grid.getCells()[row][column].right)
           canvas.drawLine(
-              (i + 1) * cellSize, j * cellSize, (i + 1) * cellSize, (j + 1) * cellSize, painter);
+              (column + 1) * cellSize, row * cellSize, (column + 1) * cellSize, (row + 1) * cellSize, painter);
       }
     }
   }
