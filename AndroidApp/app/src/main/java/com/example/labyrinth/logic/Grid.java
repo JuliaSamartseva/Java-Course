@@ -45,6 +45,17 @@ public class Grid {
     }
   }
 
+  public void updateLabyrinth() {
+    for (int i = 0; i < rowsNumber; i++) {
+      for (int j = 0; j < columnsNumber; j++) {
+        cells[i][j].updateCell();
+      }
+    }
+    generateLabyrinth();
+    playerLocation = cells[0][0];
+    exitLocation = cells[rowsNumber - 1] [columnsNumber - 1];
+  }
+
   private Cell[][] initialiseCells() {
     Cell[][] result = new Cell[rowsNumber][columnsNumber];
     for (int i = 0; i < rowsNumber; i++) {
@@ -156,6 +167,13 @@ public class Grid {
     public Cell(int row, int column) {
       this.row = row;
       this.column = column;
+    }
+
+    private void updateCell() {
+      left = true;
+      top = true;
+      bottom = true;
+      right = true;
     }
   }
 }

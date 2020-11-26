@@ -1,5 +1,6 @@
 package com.example.labyrinth;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,6 +9,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -68,6 +70,8 @@ public class LabyrinthView extends View {
           if (dy > 0) grid.movePlayer(Direction.DOWN);
           else grid.movePlayer(Direction.UP);
         }
+        if (grid.getPlayerLocation() == grid.getExitLocation())
+          grid.updateLabyrinth();
         invalidate();
       }
       return true;
