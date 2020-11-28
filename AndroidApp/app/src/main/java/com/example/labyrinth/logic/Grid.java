@@ -21,28 +21,38 @@ public class Grid {
     generateLabyrinth();
 
     playerLocation = cells[0][0];
-    exitLocation = cells[rowsNumber - 1] [columnsNumber - 1];
+    exitLocation = cells[rowsNumber - 1][columnsNumber - 1];
   }
 
-  public void movePlayer(Direction direction) {
+  public boolean movePlayer(Direction direction) {
+    boolean successfullyMoved = false;
     switch (direction) {
       case UP:
-        if (!playerLocation.top)
+        if (!playerLocation.top) {
           playerLocation = cells[playerLocation.row - 1][playerLocation.column];
+          successfullyMoved = true;
+        }
         break;
       case DOWN:
-        if (!playerLocation.bottom)
+        if (!playerLocation.bottom) {
           playerLocation = cells[playerLocation.row + 1][playerLocation.column];
+          successfullyMoved = true;
+        }
         break;
       case LEFT:
-        if (!playerLocation.left)
+        if (!playerLocation.left) {
           playerLocation = cells[playerLocation.row][playerLocation.column - 1];
+          successfullyMoved = true;
+        }
         break;
       case RIGHT:
-        if (!playerLocation.right)
+        if (!playerLocation.right) {
           playerLocation = cells[playerLocation.row][playerLocation.column + 1];
+          successfullyMoved = true;
+        }
         break;
     }
+    return successfullyMoved;
   }
 
   public void updateLabyrinth() {
@@ -53,7 +63,7 @@ public class Grid {
     }
     generateLabyrinth();
     playerLocation = cells[0][0];
-    exitLocation = cells[rowsNumber - 1] [columnsNumber - 1];
+    exitLocation = cells[rowsNumber - 1][columnsNumber - 1];
   }
 
   private Cell[][] initialiseCells() {

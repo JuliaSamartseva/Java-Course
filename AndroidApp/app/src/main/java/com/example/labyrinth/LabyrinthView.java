@@ -1,6 +1,7 @@
 package com.example.labyrinth;
 
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -33,6 +34,7 @@ public class LabyrinthView extends View {
   private int widthMargin;
   private Ball ball;
   private int ballColor;
+  private boolean gameStarted = false;
 
   public LabyrinthView(Context context, @Nullable AttributeSet attrs) {
     super(context, attrs);
@@ -57,7 +59,8 @@ public class LabyrinthView extends View {
 
   @Override
   public boolean onTouchEvent(MotionEvent event) {
-    if (event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_DOWN) {
+    if (event.getAction() == MotionEvent.ACTION_MOVE
+        || event.getAction() == MotionEvent.ACTION_DOWN) {
       float x = event.getX();
       float y = event.getY();
 
@@ -68,27 +71,46 @@ public class LabyrinthView extends View {
       float dy = y - yPlayerCoordinate;
 
       if (Math.abs(dx) > cellSize || Math.abs(dy) > cellSize) {
+        boolean moved = false;
+        Direction direction;
         if (Math.abs(dx) > Math.abs(dy)) {
-          if (dx > 0)
-            grid.movePlayer(Direction.RIGHT);
-           else grid.movePlayer(Direction.LEFT);
+          if (dx > 0) direction = Direction.RIGHT;
+          else direction = Direction.LEFT;
         } else {
-          if (dy > 0) grid.movePlayer(Direction.DOWN);
-          else grid.movePlayer(Direction.UP);
+          if (dy > 0) direction = Direction.DOWN;
+          else direction = Direction.UP;
         }
-        if (grid.getPlayerLocation() == grid.getExitLocation())
-          grid.updateLabyrinth();
 
+        moved = grid.movePlayer(direction);
 
-        ObjectAnimator animator = ObjectAnimator.ofFloat(ball, "x", cellSize);
-        animator.setInterpolator(new DecelerateInterpolator());
-        animator.setDuration(1000);
-        animator.start();
-        invalidate();
+        if (moved) {
+          int radius = (int) ((cellSize / 2) * 0.8);
+          xPlayerCoordinate = getPlayerXCoordinate(grid.getPlayerLocation(), radius);
+          yPlayerCoordinate = getPlayerYCoordinate(grid.getPlayerLocation(), radius);
+          ObjectAnimator animator = getAnimator(xPlayerCoordinate, yPlayerCoordinate);
+          animator.start();
+          if (grid.getPlayerLocation() == grid.getExitLocation()) grid.updateLabyrinth();
+        }
       }
       return true;
     }
     return super.onTouchEvent(event);
+  }
+
+  private ObjectAnimator getAnimator(int x, int y) {
+    ObjectAnimator animator;
+    Path path = new Path();
+    path.moveTo(ball.getX(), ball.getY());
+    path.lineTo(x, y);
+    animator = ObjectAnimator.ofFloat(ball, "x", "y", path);
+    animator.setDuration(500);
+    animator.addUpdateListener(
+        new ObjectAnimator.AnimatorUpdateListener() {
+          public void onAnimationUpdate(ValueAnimator animation) {
+            invalidate();
+          }
+        });
+    return animator;
   }
 
   private void displayLabyrinth(Canvas canvas) {
@@ -107,21 +129,34 @@ public class LabyrinthView extends View {
     for (int row = 0; row < grid.getRowsNumber(); row++) {
       for (int column = 0; column < grid.getColumnsNumber(); column++) {
         if (grid.getCells()[row][column].top)
-          canvas.drawLine(column * cellSize, row * cellSize, (column + 1) * cellSize, row * cellSize, painter);
+          canvas.drawLine(
+              column * cellSize, row * cellSize, (column + 1) * cellSize, row * cellSize, painter);
         if (grid.getCells()[row][column].bottom)
           canvas.drawLine(
-              column * cellSize, (row + 1) * cellSize, (column + 1) * cellSize, (row + 1) * cellSize, painter);
+              column * cellSize,
+              (row + 1) * cellSize,
+              (column + 1) * cellSize,
+              (row + 1) * cellSize,
+              painter);
         if (grid.getCells()[row][column].left)
-          canvas.drawLine(column * cellSize, row * cellSize, column * cellSize, (row + 1) * cellSize, painter);
+          canvas.drawLine(
+              column * cellSize, row * cellSize, column * cellSize, (row + 1) * cellSize, painter);
         if (grid.getCells()[row][column].right)
           canvas.drawLine(
-              (column + 1) * cellSize, row * cellSize, (column + 1) * cellSize, (row + 1) * cellSize, painter);
+              (column + 1) * cellSize,
+              row * cellSize,
+              (column + 1) * cellSize,
+              (row + 1) * cellSize,
+              painter);
       }
     }
 
-    int xPlayerCoordinate = getPlayerXCoordinate(grid.getPlayerLocation(), radius);
-    int yPlayerCoordinate = getPlayerYCoordinate(grid.getPlayerLocation(), radius);
-    ball = new Ball(xPlayerCoordinate, yPlayerCoordinate, radius, ballColor);
+    if (!gameStarted) {
+      int xPlayerCoordinate = getPlayerXCoordinate(grid.getPlayerLocation(), radius);
+      int yPlayerCoordinate = getPlayerYCoordinate(grid.getPlayerLocation(), radius);
+      ball = new Ball(xPlayerCoordinate, yPlayerCoordinate, radius, ballColor);
+      gameStarted = true;
+    }
     canvas.restore();
     canvas.translate(ball.getX(), ball.getY());
     ball.getShapeDrawable().draw(canvas);
