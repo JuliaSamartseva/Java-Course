@@ -5,15 +5,18 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.example.labyrinth.logic.Ball;
 import com.example.labyrinth.logic.Direction;
 import com.example.labyrinth.logic.Grid;
 
@@ -28,14 +31,17 @@ public class LabyrinthView extends View {
   private int cellSize;
   private int heightMargin;
   private int widthMargin;
+  private Ball ball;
+  private int ballColor;
 
   public LabyrinthView(Context context, @Nullable AttributeSet attrs) {
     super(context, attrs);
     painter = new Paint();
     player = new Paint();
     exit = new Paint();
-    player.setColor(ContextCompat.getColor(context, R.color.colorBall));
-    exit.setColor(ContextCompat.getColor(context, R.color.colorBall));
+    ballColor = ContextCompat.getColor(context, R.color.colorBall);
+    player.setColor(ballColor);
+    exit.setColor(ballColor);
     exit.setStyle(Paint.Style.STROKE);
     exit.setStrokeWidth(EXIT_WIDTH);
     painter.setColor(ContextCompat.getColor(context, R.color.colorBorder));
@@ -72,6 +78,12 @@ public class LabyrinthView extends View {
         }
         if (grid.getPlayerLocation() == grid.getExitLocation())
           grid.updateLabyrinth();
+
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(ball, "x", cellSize);
+        animator.setInterpolator(new DecelerateInterpolator());
+        animator.setDuration(1000);
+        animator.start();
         invalidate();
       }
       return true;
@@ -85,15 +97,12 @@ public class LabyrinthView extends View {
     widthMargin = calculateWidthMargin(cellSize);
 
     int radius = (int) ((cellSize / 2) * 0.8);
-    int xPlayerCoordinate = getXCoordinate(grid.getPlayerLocation());
-    int yPlayerCoordinate = getYCoordinate(grid.getPlayerLocation());
-    canvas.drawCircle(xPlayerCoordinate, yPlayerCoordinate, radius, player);
 
     int xExitCoordinate = getXCoordinate(grid.getExitLocation());
     int yExitCoordinate = getYCoordinate(grid.getExitLocation());
 
+    canvas.save();
     canvas.drawCircle(xExitCoordinate, yExitCoordinate, radius, exit);
-
     canvas.translate(widthMargin, heightMargin);
     for (int row = 0; row < grid.getRowsNumber(); row++) {
       for (int column = 0; column < grid.getColumnsNumber(); column++) {
@@ -109,6 +118,21 @@ public class LabyrinthView extends View {
               (column + 1) * cellSize, row * cellSize, (column + 1) * cellSize, (row + 1) * cellSize, painter);
       }
     }
+
+    int xPlayerCoordinate = getPlayerXCoordinate(grid.getPlayerLocation(), radius);
+    int yPlayerCoordinate = getPlayerYCoordinate(grid.getPlayerLocation(), radius);
+    ball = new Ball(xPlayerCoordinate, yPlayerCoordinate, radius, ballColor);
+    canvas.restore();
+    canvas.translate(ball.getX(), ball.getY());
+    ball.getShapeDrawable().draw(canvas);
+  }
+
+  private int getPlayerXCoordinate(Grid.Cell x, int radius) {
+    return (int) (widthMargin + x.column * cellSize + (cellSize / 2 - radius));
+  }
+
+  private int getPlayerYCoordinate(Grid.Cell x, int radius) {
+    return (int) (heightMargin + x.row * cellSize + (cellSize / 2 - radius));
   }
 
   private int getXCoordinate(Grid.Cell x) {
