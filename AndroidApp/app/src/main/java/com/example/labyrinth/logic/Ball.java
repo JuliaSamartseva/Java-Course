@@ -46,22 +46,6 @@ public class Ball {
     return shapeDrawable;
   }
 
-  public float getWidth() {
-    return shape.getWidth();
-  }
-
-  public void setWidth(float width) {
-    shape.resize(width, shape.getHeight());
-  }
-
-  public float getHeight() {
-    return shape.getHeight();
-  }
-
-  public void setHeight(float height) {
-    shape.resize(shape.getWidth(), height);
-  }
-
   public void setAlpha(float alpha) {
     shapeDrawable.setAlpha((int) (alpha * 255f + 0.5f));
   }

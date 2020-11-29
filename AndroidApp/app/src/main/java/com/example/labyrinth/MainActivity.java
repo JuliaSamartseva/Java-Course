@@ -12,11 +12,14 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    Button generateSolution = findViewById(R.id.generateSolution);
+    final Button generateSolution = findViewById(R.id.generateSolution);
+    final LabyrinthView view = findViewById(R.id.view);
     generateSolution.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {}
+          public void onClick(View v) {
+            if (!view.showSolution) view.showSolution();
+          }
         });
   }
 }

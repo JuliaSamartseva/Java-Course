@@ -1,17 +1,17 @@
 package com.example.labyrinth;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Animation;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -21,6 +21,8 @@ import com.example.labyrinth.logic.Ball;
 import com.example.labyrinth.logic.Direction;
 import com.example.labyrinth.logic.Grid;
 
+import java.util.ArrayList;
+
 public class LabyrinthView extends View {
   private Paint painter;
   private Paint player, exit;
@@ -29,6 +31,7 @@ public class LabyrinthView extends View {
   private static final int ROWS = 15;
   private static final int COLUMNS = 10;
   private static final int BALL_SPEED = 300;
+  private static final int GENERATING_SOLUTION_BALL_SPEED = 150;
   private Grid grid;
   private int cellSize;
   private int heightMargin;
@@ -37,6 +40,7 @@ public class LabyrinthView extends View {
   private int radius;
   private int ballColor;
   private boolean gameStarted = false;
+  public boolean showSolution = false;
 
   public LabyrinthView(Context context, @Nullable AttributeSet attrs) {
     super(context, attrs);
@@ -61,6 +65,8 @@ public class LabyrinthView extends View {
 
   @Override
   public boolean onTouchEvent(MotionEvent event) {
+    if (showSolution) return super.onTouchEvent(event);
+
     if (event.getAction() == MotionEvent.ACTION_MOVE
         || event.getAction() == MotionEvent.ACTION_DOWN) {
       float x = event.getX();
@@ -91,11 +97,18 @@ public class LabyrinthView extends View {
           ObjectAnimator animator = getAnimator(xPlayerCoordinate, yPlayerCoordinate);
           animator.start();
           if (grid.getPlayerLocation() == grid.getExitLocation()) {
-            grid.updateLabyrinth();
-            xPlayerCoordinate = getPlayerXCoordinate(grid.getPlayerLocation());
-            yPlayerCoordinate = getPlayerYCoordinate(grid.getPlayerLocation());
-            animator = getAnimator(xPlayerCoordinate, yPlayerCoordinate);
-            animator.start();
+            animator.addListener(
+                new AnimatorListenerAdapter() {
+                  @Override
+                  public void onAnimationEnd(Animator animation) {
+                    grid.updateLabyrinth();
+                    int xPlayerCoordinate = getPlayerXCoordinate(grid.getPlayerLocation());
+                    int yPlayerCoordinate = getPlayerYCoordinate(grid.getPlayerLocation());
+                    ObjectAnimator animator = getAnimator(xPlayerCoordinate, yPlayerCoordinate);
+                    animator.start();
+                    super.onAnimationEnd(animation);
+                  }
+                });
           }
         }
       }
@@ -104,12 +117,49 @@ public class LabyrinthView extends View {
     return super.onTouchEvent(event);
   }
 
+  public void showSolution() {
+    showSolution = true;
+    Path path = new Path();
+    path.moveTo(ball.getX(), ball.getY());
+
+    ArrayList<Grid.Cell> solutionPath = grid.getSolution();
+    int pathSize = solutionPath.size();
+    for (Grid.Cell cell : solutionPath) {
+      path.lineTo(getPlayerXCoordinate(cell), getPlayerYCoordinate(cell));
+    }
+
+    ObjectAnimator animator = ObjectAnimator.ofFloat(ball, "x", "y", path);
+    animator.setDuration(GENERATING_SOLUTION_BALL_SPEED * pathSize);
+
+    animator.addUpdateListener(
+        new ObjectAnimator.AnimatorUpdateListener() {
+          public void onAnimationUpdate(ValueAnimator animation) {
+            invalidate();
+          }
+        });
+
+    animator.addListener(
+        new AnimatorListenerAdapter() {
+          @Override
+          public void onAnimationEnd(Animator animation) {
+            showSolution = false;
+            grid.updateLabyrinth();
+            int xPlayerCoordinate = getPlayerXCoordinate(grid.getPlayerLocation());
+            int yPlayerCoordinate = getPlayerYCoordinate(grid.getPlayerLocation());
+            ObjectAnimator animator = getAnimator(xPlayerCoordinate, yPlayerCoordinate);
+            animator.start();
+            super.onAnimationEnd(animation);
+          }
+        });
+
+    animator.start();
+  }
+
   private ObjectAnimator getAnimator(int x, int y) {
-    ObjectAnimator animator;
     Path path = new Path();
     path.moveTo(ball.getX(), ball.getY());
     path.lineTo(x, y);
-    animator = ObjectAnimator.ofFloat(ball, "x", "y", path);
+    ObjectAnimator animator = ObjectAnimator.ofFloat(ball, "x", "y", path);
     animator.setDuration(BALL_SPEED);
     animator.addUpdateListener(
         new ObjectAnimator.AnimatorUpdateListener() {

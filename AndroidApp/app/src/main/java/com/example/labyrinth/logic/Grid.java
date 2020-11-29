@@ -1,5 +1,6 @@
 package com.example.labyrinth.logic;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,6 +15,8 @@ public class Grid {
   private Cell playerLocation;
   private Cell exitLocation;
 
+  private Direction[] directions = {Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT};
+
   public Grid(int rows, int columns) {
     columnsNumber = columns;
     rowsNumber = rows;
@@ -25,34 +28,32 @@ public class Grid {
   }
 
   public boolean movePlayer(Direction direction) {
-    boolean successfullyMoved = false;
+    boolean canMove = canMove(playerLocation, direction);
+    if (canMove
+        && canTraverse(
+            playerLocation.row + direction.shifts[0], playerLocation.column + direction.shifts[1]))
+      playerLocation =
+          cells[playerLocation.row + direction.shifts[0]][
+              playerLocation.column + direction.shifts[1]];
+    return canMove;
+  }
+
+  private boolean canMove(Cell currentCell, Direction direction) {
     switch (direction) {
       case UP:
-        if (!playerLocation.top) {
-          playerLocation = cells[playerLocation.row - 1][playerLocation.column];
-          successfullyMoved = true;
-        }
+        if (!currentCell.top) return true;
         break;
       case DOWN:
-        if (!playerLocation.bottom) {
-          playerLocation = cells[playerLocation.row + 1][playerLocation.column];
-          successfullyMoved = true;
-        }
+        if (!currentCell.bottom) return true;
         break;
       case LEFT:
-        if (!playerLocation.left) {
-          playerLocation = cells[playerLocation.row][playerLocation.column - 1];
-          successfullyMoved = true;
-        }
+        if (!currentCell.left) return true;
         break;
       case RIGHT:
-        if (!playerLocation.right) {
-          playerLocation = cells[playerLocation.row][playerLocation.column + 1];
-          successfullyMoved = true;
-        }
+        if (!currentCell.right) return true;
         break;
     }
-    return successfullyMoved;
+    return false;
   }
 
   public void updateLabyrinth() {
@@ -131,6 +132,38 @@ public class Grid {
       int index = random.nextInt(neighbours.size());
       return neighbours.get(index);
     } else return null;
+  }
+
+  public ArrayList<Cell> getSolution() {
+    ArrayList<Cell> result = new ArrayList<>();
+    result.add(playerLocation);
+    HashSet<Cell> visited = new HashSet<>();
+    visited.add(playerLocation);
+    if (!hasPathToEnd(playerLocation, result, visited)) result.remove(result.size() - 1);
+    return result;
+  }
+
+  private boolean hasPathToEnd(Cell node, ArrayList<Cell> path, HashSet<Cell> visited) {
+    if (node.equals(exitLocation)) return true;
+
+    for (Direction direction : directions) {
+      int row = node.row + direction.shifts[0];
+      int column = node.column + direction.shifts[1];
+      if (canTraverse(row, column)) {
+        Cell next = cells[row][column];
+        if (!visited.contains(next) && canMove(node, direction)) {
+          visited.add(next);
+          path.add(next);
+          if (hasPathToEnd(next, path, visited)) return true;
+          path.remove(path.size() - 1);
+        }
+      }
+    }
+    return false;
+  }
+
+  public boolean canTraverse(int row, int column) {
+    return row >= 0 && row < rowsNumber && column >= 0 && column < columnsNumber;
   }
 
   public Cell getPlayerLocation() {
