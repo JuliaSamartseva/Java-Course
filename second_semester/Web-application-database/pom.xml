@@ -48,8 +48,23 @@
           <artifactId>liquibase-maven-plugin</artifactId>
           <version>4.2.0</version>
           <configuration>
+            <propertyFileWillOverride>true</propertyFileWillOverride>
             <propertyFile>PostgreSQL/liquibase.properties</propertyFile>
+            <changeLogFile>PostgreSQL/dbchangelog.xml</changeLogFile>
           </configuration>
+          <executions>
+            <execution>
+              <!--  Another Error: plugin execution not covered by lifecycle configuration..-->
+              <!-- <phase>process-resources</phase> <goals> <goal>update</goal> </goals> -->
+            </execution>
+          </executions>
+          <dependencies>
+            <dependency>
+              <groupId>postgresql</groupId>
+              <artifactId>postgresql</artifactId>
+              <version>9.1-901-1.jdbc4</version>
+            </dependency>
+          </dependencies>
         </plugin>
 
         <plugin>
