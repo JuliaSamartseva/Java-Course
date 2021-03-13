@@ -1,7 +1,7 @@
 package data;
 
-public class Administrator extends Member {
-  public Administrator(Long id, String name, String password) {
-    super(id, name, password);
+public class Administrator extends User {
+  public Administrator(Long id, String name) {
+    super(id, name, UserType.ADMINISTRATOR);
   }
 }

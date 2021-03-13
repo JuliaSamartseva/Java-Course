@@ -2,11 +2,11 @@ package data;
 
 import java.util.ArrayList;
 
-public class Client extends Member {
+public class Client extends User {
   private ArrayList<Product> shoppingCart;
 
-  public Client(Long id, String name, String password) {
-    super(id, name, password);
+  public Client(Long id, String name) {
+    super(id, name, UserType.CLIENT);
     shoppingCart = new ArrayList<>();
   }
 

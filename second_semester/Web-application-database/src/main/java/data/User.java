@@ -1,26 +1,30 @@
 package data;
 
-public class Member {
+public class User {
   private final Long id;
-  private String userName;
-  private String password;
+  private final UserType type;
+  private String name;
 
-  public Member(Long id, String userName, String password) {
+  public User(Long id, String name, UserType type) {
     this.id = id;
-    this.userName = userName;
-    this.password = password;
+    this.name = name;
+    this.type = type;
   }
 
   public Long getId() {
     return id;
   }
 
-  public String getUserName() {
-    return userName;
+  public UserType getType() {
+    return type;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   @Override
@@ -33,7 +37,7 @@ public class Member {
     if (this == obj) return true;
     if (obj == null) return false;
     if (this.getClass() != obj.getClass()) return false;
-    Member registeredUser = ((Member) obj);
+    User registeredUser = ((User) obj);
     return id.equals(registeredUser.id);
   }
 }
