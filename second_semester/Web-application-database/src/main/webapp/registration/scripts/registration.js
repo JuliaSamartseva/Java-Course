@@ -6,6 +6,7 @@ const checkFormInputs =
 
         const data = new Map([
             ['username', document.getElementById('username').value],
+            ['password', document.getElementById('password').value],
             ['role', document.getElementById('role').value],
         ]);
 
@@ -34,6 +35,16 @@ const checkFormInputs =
             return;
         }
 
+        if (data.get('password').length < 5) {
+            formFailure(`Password is too short. The minimum allowed length is 5`);
+            return;
+        }
+
+        if (data.get('password').length > 20) {
+            formFailure(`Password is too long. The maximum allowed length is 20.`);
+            return;
+        }
+
 
         if (!USER_TYPES.has(data.get('role').toLowerCase())) {
             formFailure(`The selected role in the registration was not recognised. Please try again.`);
@@ -44,6 +55,20 @@ const checkFormInputs =
         data.forEach((value, key) => {
             encodedData.push(`${key}=${value}`);
         });
+
+        const body = encodedData.join('&');
+
+        const response = await fetch('registration', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: body
+        });
+
+        if (response.ok) {
+            window.location.href = `${data.get('role')}/home.html`
+        } else {
+            formFailure("An unexpected error occurred. Please try again.")
+        }
 
     }
 

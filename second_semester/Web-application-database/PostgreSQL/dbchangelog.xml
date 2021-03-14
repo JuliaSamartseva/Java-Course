@@ -39,7 +39,7 @@
 
         <sql>CREATE TYPE user_type AS ENUM('CLIENT', 'ADMINISTRATOR')</sql>
 
-        <createTable tableName="user">
+        <createTable tableName="users">
             <column name="id" autoIncrement="true" type="int">
                 <constraints primaryKey="true" nullable="false" unique="true" />
             </column>
@@ -48,10 +48,13 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="type" type="user_type">
+            <column name="password" type="varchar(30)">
                 <constraints nullable="false" />
             </column>
 
+            <column name="type" type="user_type">
+                <constraints nullable="false" />
+            </column>
         </createTable>
 
         <createTable tableName="shopping_cart">
@@ -88,7 +91,7 @@
                 onDelete="CASCADE"
                 onUpdate="RESTRICT"
                 referencedColumnNames="id"
-                referencedTableName="user"/>
+                referencedTableName="users"/>
 
         <addForeignKeyConstraint
                 baseColumnNames="product_id"
@@ -103,7 +106,7 @@
             <sql>DROP TYPE user_type CASCADE</sql>
             <dropTable tableName="product" cascadeConstraints="true"/>
             <dropTable tableName="product_type" cascadeConstraints="true"/>
-            <dropTable tableName="user" cascadeConstraints="true"/>
+            <dropTable tableName="users" cascadeConstraints="true"/>
             <dropTable tableName="quantity" cascadeConstraints="true"/>
         </rollback>
     </changeSet>

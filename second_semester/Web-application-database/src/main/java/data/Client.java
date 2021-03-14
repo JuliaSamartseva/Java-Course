@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Client extends User {
   private ArrayList<Product> shoppingCart;
 
-  public Client(Long id, String name) {
-    super(id, name, UserType.CLIENT);
+  public Client(int id, String name, String password) {
+    super(id, name, password, UserType.CLIENT);
     shoppingCart = new ArrayList<>();
   }
 

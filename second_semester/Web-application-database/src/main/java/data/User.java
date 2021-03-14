@@ -1,17 +1,24 @@
 package data;
 
 public class User {
-  private final Long id;
+  private int id;
   private final UserType type;
   private String name;
+  private String password;
 
-  public User(Long id, String name, UserType type) {
+  public User(String name, String password, UserType type) {
+    this.name = name;
+    this.password = password;
+    this.type = type;
+  }
+  public User(int id, String name, String password, UserType type) {
     this.id = id;
     this.name = name;
+    this.password = password;
     this.type = type;
   }
 
-  public Long getId() {
+  public int getId() {
     return id;
   }
 
@@ -23,13 +30,12 @@ public class User {
     return name;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public String getPassword() {
+    return password;
   }
 
-  @Override
-  public int hashCode() {
-    return id.hashCode();
+  public void setName(String name) {
+    this.name = name;
   }
 
   @Override
@@ -38,6 +44,6 @@ public class User {
     if (obj == null) return false;
     if (this.getClass() != obj.getClass()) return false;
     User registeredUser = ((User) obj);
-    return id.equals(registeredUser.id);
+    return id == registeredUser.id;
   }
 }

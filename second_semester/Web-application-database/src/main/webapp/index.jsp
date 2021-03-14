@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Registration</title>
     <%@ include file="/bootstrap-css.html" %>
-    <script src="scripts/registration.js"></script>
+    <script src="registration/scripts/registration.js"></script>
 </head>
 <body>
 <div class="container" id="container">
-    <%@ include file = "registration_form.html" %>
+    <%@ include file = "registration/registration_form.html" %>
 </div>
 </body>
 <%@ include file="/bootstrap-js.html" %>

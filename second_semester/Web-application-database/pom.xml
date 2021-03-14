@@ -38,14 +38,15 @@
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
+      <version>4.0.1</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 
   <build>
     <finalName>Web-application-database</finalName>
 
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement>
       <plugins>
 
         <plugin>
@@ -59,8 +60,6 @@
           </configuration>
           <executions>
             <execution>
-              <!--  Another Error: plugin execution not covered by lifecycle configuration..-->
-              <!-- <phase>process-resources</phase> <goals> <goal>update</goal> </goals> -->
             </execution>
           </executions>
           <dependencies>
