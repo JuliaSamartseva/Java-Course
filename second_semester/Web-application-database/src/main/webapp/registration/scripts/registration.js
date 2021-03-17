@@ -65,7 +65,7 @@ const checkFormInputs =
         });
 
         if (response.ok) {
-            window.location.href = `${data.get('role')}/home.html`
+            window.location.href = `${data.get('role')}/home.jsp`
         } else {
             formFailure("An unexpected error occurred. Please try again.")
         }

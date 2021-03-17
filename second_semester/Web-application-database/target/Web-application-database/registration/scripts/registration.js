@@ -65,8 +65,7 @@ const checkFormInputs =
         });
 
         if (response.ok) {
-            window.location.href = `${data.get('role')}/home.html`
-            // setTimeout(() => window.location.href = `${data.get('role')}/home.html`, 1000);
+            window.location.href = `${data.get('role')}/home.jsp`
         } else {
             formFailure("An unexpected error occurred. Please try again.")
         }
