@@ -17,6 +17,8 @@ public class ProductsService {
 
   private static final String addProductQuery =
           "INSERT INTO internetshop.public.product(name, price, description, product_type_id) VALUES (?, ?, ?, ?)";
+  private static final String removeProductWithIdQuery =
+          "DELETE FROM internetshop.public.product WHERE product.id = ?";
   private static final String allProductsQuery =
           "SELECT product.id, product.name, product.price, product.description, product_type.id, product_type.name, product_type.description FROM internetshop.public.product INNER JOIN internetshop.public.product_type ON product.product_type_id = product_type.id";
   private static final String allProductTypesQuery =
@@ -24,6 +26,17 @@ public class ProductsService {
   private static final String getProductTypeQuery =
           "SELECT product_type.id, name, description FROM internetshop.public.product_type WHERE product_type.id = ?";
 
+
+  public static void removeProductWithId(int id) {
+    try (Connection connection = DatabaseConnection.getConnection()) {
+      PreparedStatement prepareStatement = connection.prepareStatement(removeProductWithIdQuery);
+      prepareStatement.setInt(1, id);
+      if (prepareStatement.executeUpdate() <= 0)
+        log.warning("Cannot remove product with id "  + id);
+    } catch (IOException | SQLException e) {
+      e.printStackTrace();
+    }
+  }
 
   public static void addProduct(Product product) {
     if (product == null) {

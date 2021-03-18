@@ -3,7 +3,6 @@ package servlets;
 import com.google.gson.Gson;
 import data.Product;
 import data.ProductType;
-import data.UserType;
 import service.ProductsService;
 
 import javax.servlet.annotation.WebServlet;
@@ -50,6 +49,9 @@ public class ProductsServlet extends HttpServlet {
         response
                 .getWriter()
                 .println(gson.toJson(productTypes.toArray(new ProductType[] {})));
+      } else if (urls[1].equals("remove")) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        ProductsService.removeProductWithId(id);
       }
     }
 

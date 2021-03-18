@@ -34,13 +34,17 @@ const populateTable = async () => {
             let actions = document.createElement('td');
             let editButton = document.createElement("button");
             editButton.innerText = "edit"
-            editButton.setAttribute('data-id', request.productId)
             editButton.className = "badge badge-dark";
             editButton.style.marginRight = "10px";
+            editButton.onclick = function () {
+
+            }
             let removeButton = document.createElement("button");
             removeButton.innerText = "remove";
-            removeButton.setAttribute('data-id', request.productId);
             removeButton.className = "badge badge-dark";
+            removeButton.onclick = async function () {
+                await fetch(`../servlets/products/remove?id=${request.productId}`)
+            }
             actions.appendChild(editButton);
             actions.appendChild(removeButton);
 
