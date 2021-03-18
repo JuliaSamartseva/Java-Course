@@ -4,7 +4,7 @@ window.onload = async () => {
 
 const populateTable = async () => {
     const table = document.getElementById('products');
-    const res = await fetch('fetch-products');
+    const res = await fetch('../servlets/products');
     const requests = await res.json();
 
     const createRow =

@@ -11,6 +11,7 @@ public class User {
     this.password = password;
     this.type = type;
   }
+
   public User(int id, String name, String password, UserType type) {
     this.id = id;
     this.name = name;

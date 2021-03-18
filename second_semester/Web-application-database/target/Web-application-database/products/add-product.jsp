@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Registration</title>
+    <title>Product addition form</title>
     <%@ include file="/bootstrap-css.html" %>
-    <script src="registration/scripts/registration.js"></script>
+    <script src="scripts/add-product.js"></script>
 </head>
 <body>
 <div class="container" id="container">
-    <%@ include file = "registration/registration-form.html" %>
+    <%@ include file = "add-product-form.html" %>
 </div>
 </body>
 <%@ include file="/bootstrap-js.html" %>

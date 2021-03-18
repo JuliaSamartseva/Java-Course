@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/registration")
+@WebServlet("/servlets/registration")
 public class RegistrationServlet extends HttpServlet {
   private static final Logger log = Logger.getLogger(RegistrationServlet.class.getName());
 

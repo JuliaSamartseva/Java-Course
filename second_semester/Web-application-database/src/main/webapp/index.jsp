@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container" id="container">
-    <%@ include file = "registration/registration_form.html" %>
+    <%@ include file = "registration/registration-form.html" %>
 </div>
 </body>
 <%@ include file="/bootstrap-js.html" %>

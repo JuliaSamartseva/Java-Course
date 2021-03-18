@@ -1,8 +1,6 @@
 package service;
 
-import data.Product;
-import data.ProductType;
-import data.User;
+import data.*;
 import jdbc.DatabaseConnection;
 
 import java.io.IOException;
@@ -21,6 +19,11 @@ public class ProductsService {
           "INSERT INTO internetshop.public.product(name, price, description, product_type_id) VALUES (?, ?, ?, ?)";
   private static final String allProductsQuery =
           "SELECT product.id, product.name, product.price, product.description, product_type.id, product_type.name, product_type.description FROM internetshop.public.product INNER JOIN internetshop.public.product_type ON product.product_type_id = product_type.id";
+  private static final String allProductTypesQuery =
+          "SELECT product_type.id, name, description FROM internetshop.public.product_type";
+  private static final String getProductTypeQuery =
+          "SELECT product_type.id, name, description FROM internetshop.public.product_type WHERE product_type.id = ?";
+
 
   public static void addProduct(Product product) {
     if (product == null) {
@@ -38,6 +41,40 @@ public class ProductsService {
     } catch (IOException | SQLException e) {
       e.printStackTrace();
     }
+  }
+
+  public static ProductType getProductType(int id) {
+    log.info("Getting product type from the database.");
+    ProductType type = null;
+    try (Connection connection = DatabaseConnection.getConnection()) {
+      log.info("Connected to the database.");
+      PreparedStatement preparedStatement = connection.prepareStatement(getProductTypeQuery);
+      preparedStatement.setInt(1, id);
+      ResultSet resultSet = preparedStatement.executeQuery();
+      if (resultSet.next()) {
+        type = getProductTypeFromResultSet(resultSet);
+        log.info("Found product with name.");
+      } else log.info("Couldn't find product type with the given name.");
+    } catch (IOException | SQLException e) {
+      e.printStackTrace();
+    }
+    return type;
+  }
+
+  public static List<ProductType> getProductTypes() {
+    log.info("Getting product types from the database.");
+    List<ProductType> productTypes = new ArrayList<>();
+    try (Connection connection = DatabaseConnection.getConnection()) {
+      log.info("Connected to the database.");
+      PreparedStatement preparedStatement = connection.prepareStatement(allProductTypesQuery);
+      ResultSet rs = preparedStatement.executeQuery();
+      while(rs.next()) {
+        productTypes.add(getProductTypeFromResultSet(rs));
+      }
+    } catch (IOException | SQLException e) {
+      e.printStackTrace();
+    }
+    return productTypes;
   }
 
   public static List<Product> getProducts() {
@@ -62,6 +99,13 @@ public class ProductsService {
       e.printStackTrace();
     }
     return products;
+  }
+
+  private static ProductType getProductTypeFromResultSet(ResultSet rs) throws SQLException {
+    int id = rs.getInt(1);
+    String name = rs.getString(2);
+    String description = rs.getString(3);
+    return new ProductType(id, name, description);
   }
 }
 

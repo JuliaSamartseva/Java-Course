@@ -58,7 +58,7 @@ const checkFormInputs =
 
         const body = encodedData.join('&');
 
-        const response = await fetch('registration', {
+        const response = await fetch('./servlets/registration', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: body
