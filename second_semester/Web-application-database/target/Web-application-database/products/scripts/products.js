@@ -36,11 +36,15 @@ const populateTable = async () => {
             editButton.innerText = "edit"
             editButton.className = "badge badge-dark";
             editButton.style.marginRight = "10px";
+            editButton.onclick = function () {
+                window.location = `http://localhost:8080/Web_application_database_war/products/product-manager.jsp?id=${request.productId}`;
+            }
             let removeButton = document.createElement("button");
             removeButton.innerText = "remove";
             removeButton.className = "badge badge-dark";
             removeButton.onclick = async function () {
                 await fetch(`../servlets/products/remove?id=${request.productId}`)
+                window.location.reload()
             }
             actions.appendChild(editButton);
             actions.appendChild(removeButton);

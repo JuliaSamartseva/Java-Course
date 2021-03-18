@@ -1,5 +1,17 @@
 window.onload = async () => {
     await populateTable();
+    let result = findGetParameter("id")
+    if (result != null) {
+        const res = await fetch(`../servlets/products/edit?id=${result}`);
+        const request = await res.json();
+        document.getElementById('product-name').value = request.name
+        document.getElementById('price').value = request.price
+        document.getElementById('description').value = request.description
+        for (let option of document.getElementById("type").options) {
+            if (option.text === request.productType)
+                option.selected = true
+        }
+    }
 }
 
 const populateTable = async () => {
@@ -47,8 +59,8 @@ const checkFormInputs =
             }
         }
 
-        if (data.get('product-name').length < 5) {
-            formFailure(`Product Name is too short. The minimum allowed length is 5`);
+        if (data.get('product-name').length < 3) {
+            formFailure(`Product Name is too short. The minimum allowed length is 3`);
             return;
         }
 
@@ -62,15 +74,28 @@ const checkFormInputs =
             encodedData.push(`${key}=${value}`);
         });
 
-        const body = encodedData.join('&');
+        let editId = findGetParameter("id")
+        // Add product to the db
 
-        const response = await fetch('../servlets/products/add', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: body
-        });
+        let response = null
+        if (editId == null) {
+            const body = encodedData.join('&');
+            response = await fetch('../servlets/products/add', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: body
+            });
+        } else { // Edit product with the given id from the get request
+            encodedData.push(`id=${editId}`)
+            const body = encodedData.join('&');
+            response = await fetch('../servlets/products/edit', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: body
+            });
+        }
 
-        if (response.ok) {
+        if (response != null && response.ok) {
             window.location.href = `http://localhost:8080/Web_application_database_war/administrator/home.jsp`
         } else {
             formFailure("An unexpected error occurred. Please try again.")
@@ -83,4 +108,17 @@ const formFailure = (errorMessage) => {
     modalText.innerText = errorMessage;
     $('#failureModal').modal(null);
     document.getElementById('product-submit').disabled = false;
+}
+
+function findGetParameter(parameterName) {
+    let result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+            tmp = item.split("=");
+            if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+    return result;
 }
