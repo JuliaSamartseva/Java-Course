@@ -5,18 +5,21 @@ public class User {
   private final UserType type;
   private String name;
   private String password;
+  private boolean blocked;
 
-  public User(String name, String password, UserType type) {
+  public User(String name, String password, UserType type, boolean blocked) {
     this.name = name;
     this.password = password;
     this.type = type;
+    this.blocked = blocked;
   }
 
-  public User(int id, String name, String password, UserType type) {
+  public User(int id, String name, String password, UserType type, boolean blocked) {
     this.id = id;
     this.name = name;
     this.password = password;
     this.type = type;
+    this.blocked = blocked;
   }
 
   public int getId() {

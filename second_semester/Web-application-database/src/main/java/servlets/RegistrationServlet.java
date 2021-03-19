@@ -30,7 +30,7 @@ public class RegistrationServlet extends HttpServlet {
     String name = parameterMap.get("username")[0];
     String password = parameterMap.get("password")[0];
     UserType type = UserType.fromString(parameterMap.get("role")[0]);
-    User user = new User(name, password, type);
+    User user = new User(name, password, type, false);
     UserService.registerUser(user);
     response.setStatus(HttpServletResponse.SC_OK);
   }

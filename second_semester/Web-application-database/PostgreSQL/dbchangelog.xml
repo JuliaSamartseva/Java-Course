@@ -55,6 +55,10 @@
             <column name="type" type="user_type">
                 <constraints nullable="false" />
             </column>
+
+            <column name="blocked" type="bool">
+                <constraints nullable="false" />
+            </column>
         </createTable>
 
         <createTable tableName="shopping_cart">

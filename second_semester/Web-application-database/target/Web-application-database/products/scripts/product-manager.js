@@ -77,7 +77,7 @@ const checkFormInputs =
         let editId = findGetParameter("id")
         // Add product to the db
 
-        let response = null
+        let response = null;
         if (editId == null) {
             const body = encodedData.join('&');
             response = await fetch('../servlets/products/add', {

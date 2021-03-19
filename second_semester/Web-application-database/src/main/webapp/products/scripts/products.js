@@ -31,7 +31,7 @@ const populateTable = async () => {
 
     const changeButtons =
         (request) => {
-            let actions = document.createElement('td');
+            const actions = document.createElement('td');
             let editButton = document.createElement("button");
             editButton.innerText = "edit"
             editButton.className = "badge badge-dark";
