@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Product List</title>
     <%@ include file="/bootstrap-css.html" %>
-    <script src="../products/scripts/products.js"></script>
+    <script src="../products/scripts/products-administrator.js"></script>
 </head>
 <body>
 <div class="container" id="container">
