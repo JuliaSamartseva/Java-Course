@@ -44,7 +44,7 @@ public class UserService {
       prepareStatement.setString(1, user.getName());
       prepareStatement.setString(2, user.getPassword());
       prepareStatement.setBoolean(3, false);
-      prepareStatement.setString(4, String.valueOf(user.getType()));
+      prepareStatement.setString(4, String.valueOf(user.getType()).toUpperCase());
       if (prepareStatement.executeUpdate() <= 0) log.warning("Cannot register user.");
     } catch (IOException | SQLException e) {
       e.printStackTrace();
