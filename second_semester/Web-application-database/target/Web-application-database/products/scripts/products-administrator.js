@@ -39,7 +39,7 @@ const populateTable = async () => {
         (request) => {
             const actions = document.createElement('td');
             let editButton = document.createElement("button");
-            editButton.innerText = "edit"
+            editButton.innerText = "edit";
             editButton.className = "badge badge-dark";
             editButton.style.marginRight = "10px";
             editButton.onclick = function () {
@@ -49,8 +49,8 @@ const populateTable = async () => {
             removeButton.innerText = "remove";
             removeButton.className = "badge badge-dark";
             removeButton.onclick = async function () {
-                await fetch(`../servlets/products/remove?id=${request.productId}`)
-                window.location.reload()
+                await fetch(`../servlets/products/remove?id=${request.productId}`);
+                window.location.reload();
             }
             actions.appendChild(editButton);
             actions.appendChild(removeButton);

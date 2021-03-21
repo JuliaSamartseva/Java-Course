@@ -51,7 +51,7 @@ public class UserService {
     }
   }
 
-  public static UserType findUser(String name, String password) {
+  public static UserInfo findUser(String name, String password) {
     log.info("Checking username and password");
     try (Connection connection = DatabaseConnection.getConnection()) {
       log.info("Connected to the database.");
@@ -60,14 +60,8 @@ public class UserService {
       while (rs.next()) {
         User user = getUserFromResultSet(rs);
         if (user.getName().equals(name) && user.getPassword().equals(password)) {
-          if (user.isBlocked()) {
-            log.info("The user is blocked");
-            return null;
-          }
-          else {
-            log.info("Found user, redirecting to " + user.getType() + " page");
-            return user.getType();
-          }
+          log.info("Found user, redirecting to " + user.getType() + " page");
+          return new UserInfo(user.getId(), user.getType(), user.isBlocked());
         }
       }
     } catch (IOException | SQLException e) {
@@ -117,5 +111,17 @@ public class UserService {
     boolean blocked = rs.getBoolean(5);
     if (type == UserType.ADMINISTRATOR) return new Administrator(id, name, password, blocked);
     else return new Client(id, name, password, blocked);
+  }
+
+  public static class UserInfo {
+    public int id;
+    public UserType type;
+    public boolean blocked;
+
+    public UserInfo(int id, UserType type, boolean blocked) {
+      this.id = id;
+      this.type = type;
+      this.blocked = blocked;
+    }
   }
 }

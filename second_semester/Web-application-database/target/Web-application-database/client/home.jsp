@@ -27,7 +27,7 @@
     <hr>
     <button class="btn btn-secondary" id="logout" role="button">Log out</button>
     <a type="button" class="btn btn-dark float-right"
-       href="http://localhost:8080/Web_application_database_war/products/">Cart</a>
+       href="http://localhost:8080/Web_application_database_war/client/product-cart.jsp">Cart</a>
     <hr>
     <%@ include file="../products/products.html" %>
 </div>

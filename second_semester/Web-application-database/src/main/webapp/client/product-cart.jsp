@@ -20,10 +20,6 @@
     if (userName == null || !type.equals("client")) response.sendRedirect("http://localhost:8080/Web_application_database_war/login.jsp");
 %>
 <body>
-<div class="alert alert-success alert-dismissible">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Success!</strong> Indicates a successful or positive action.
-</div>
 <div class="container" id="container">
     <br>
     <h3 class="text-center">Products View</h3>
@@ -38,6 +34,9 @@
         </th>
         <th>
             Quantity
+        </th>
+        <th>
+            Full price
         </th>
         <th>
             Actions

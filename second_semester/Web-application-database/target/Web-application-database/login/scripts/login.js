@@ -35,10 +35,12 @@ const checkFormInputs =
             body: body
         }));
 
-        const requests = await response.json();
+        const request = await response.json();
 
-        if (requests != null) {
-            window.location.href = `${JSON.parse(JSON.stringify(requests)).toLowerCase()}/home.jsp`
+        if (request != null) {
+            let reply = JSON.parse(JSON.stringify(request)).toLowerCase();
+            if (reply !== "blocked") window.location.href = `${JSON.parse(JSON.stringify(request)).toLowerCase()}/home.jsp`
+            else formFailure("The user is blocked.")
         } else {
             formFailure("Login details are incorrect.")
         }

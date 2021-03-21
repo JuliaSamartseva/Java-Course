@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class ProductsService {
-  private static final Logger log = Logger.getLogger(UserService.class.getName());
+  private static final Logger log = Logger.getLogger(ProductsService.class.getName());
 
   private static final String editProductQuery =
           "UPDATE internetshop.public.product SET name = ?, price = ?, description = ?, product_type_id = ? WHERE id = ?";

@@ -24,23 +24,28 @@ public class LoginServlet extends HttpServlet {
     Map<String, String[]> parameterMap = request.getParameterMap();
     String name = parameterMap.get("username")[0];
     String password = parameterMap.get("password")[0];
-    UserType userType = UserService.findUser(name, password);
+    UserService.UserInfo userInfo = UserService.findUser(name, password);
 
     Gson gson = new Gson();
-    if (userType == null) response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-    else {
-      log.info("Received info about the user in the servlet.");
-      Cookie loginCookie = new Cookie("user", name);
-      Cookie typeCookie = new Cookie("type", userType.toString());
-      loginCookie.setPath("/");
-      typeCookie.setPath("/");
-      response.addCookie(loginCookie);
-      response.addCookie(typeCookie);
+    if (userInfo != null) {
+      if (!userInfo.blocked) {
+        log.info("Received info about the user in the servlet.");
+        Cookie loginCookie = new Cookie("user", Integer.toString(userInfo.id));
+        Cookie typeCookie = new Cookie("type", userInfo.type.toString());
+        loginCookie.setPath("/");
+        typeCookie.setPath("/");
+        response.addCookie(loginCookie);
+        response.addCookie(typeCookie);
 
-      log.info("Redirecting to " + userType.toString());
-      response
-              .getWriter()
-              .println(gson.toJson(userType));
+        log.info("Redirecting to " + userInfo.type.toString());
+        response
+                .getWriter()
+                .println(gson.toJson(userInfo.type));
+      } else {
+        response
+                .getWriter()
+                .println(gson.toJson("blocked"));
+      }
     }
   }
 }

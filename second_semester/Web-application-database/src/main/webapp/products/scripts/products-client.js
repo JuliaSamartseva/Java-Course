@@ -3,7 +3,7 @@ window.onload = async () => {
         await fetch(`../servlets/logout`, {
             method: 'POST'
         });
-        window.location = "http://localhost:8080/Web_application_database_war/login.jsp"
+        window.location = "http://localhost:8080/Web_application_database_war/login.jsp";
     }
     await populateTable();
 }
@@ -48,17 +48,17 @@ const populateTable = async () => {
         (id) => {
             const actions = document.createElement('td');
             let quantity = document.createElement('select');
-            quantity.appendChild(createOption(1, "Qty: 1", true))
-            quantity.appendChild(createOption(2, "Qty: 2", false))
-            quantity.appendChild(createOption(3, "Qty: 3", false))
+            quantity.appendChild(createOption(1, "Qty: 1", true));
+            quantity.appendChild(createOption(2, "Qty: 2", false));
+            quantity.appendChild(createOption(3, "Qty: 3", false));
 
             let addToCart = document.createElement("button");
             addToCart.innerText = "add to cart"
             addToCart.className = "badge badge-dark";
             addToCart.style.marginRight = "10px";
             addToCart.onclick = async function () {
-                await fetch(`../servlets/products/add-to-cart?product_id=${id}&quantity=${quantity.value}`)
-                alert("Added product to the cart.")
+                await fetch(`../servlets/cart/add-to-cart?product_id=${id}&quantity=${quantity.value}`);
+                alert("Added product to the cart.");
             }
 
             actions.appendChild(addToCart);
