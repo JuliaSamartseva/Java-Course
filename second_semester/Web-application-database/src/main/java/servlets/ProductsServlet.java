@@ -37,40 +37,46 @@ public class ProductsServlet extends HttpServlet {
       log.info("Received request to get all products");
       List<Product> products = ProductsService.getProducts();
       response
-              .getWriter()
-              .println(gson.toJson(getProductData(products).toArray(new ProductData[] {})));
+          .getWriter()
+          .println(gson.toJson(getProductData(products).toArray(new ProductData[] {})));
       return;
     }
 
     String[] urls = request.getPathInfo().split("/");
-     if (urls.length == 2) {
-       switch (urls[1]) {
-         case "product-types":
-           log.info("Received request to get all product types");
-           List<ProductType> productTypes = ProductsService.getProductTypes();
-           response
-                   .getWriter()
-                   .println(gson.toJson(productTypes.toArray(new ProductType[]{})));
-           break;
-         case "remove": {
-           log.info("Received request to remove product with given id");
-           int id = Integer.parseInt(request.getParameter("id"));
-           ProductsService.removeProductWithId(id);
-           break;
-         }
-         case "edit": {
-           log.info("Received request to get product with id");
-           int id = Integer.parseInt(request.getParameter("id"));
-           Product product = ProductsService.getProductWithId(id);
-           response.setContentType("application/json");
-           response
-                   .getWriter()
-                   .println(gson.toJson(new ProductData(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getType().getName())));
-           break;
-         }
-       }
+    if (urls.length == 2) {
+      switch (urls[1]) {
+        case "product-types":
+          log.info("Received request to get all product types");
+          List<ProductType> productTypes = ProductsService.getProductTypes();
+          response.getWriter().println(gson.toJson(productTypes.toArray(new ProductType[] {})));
+          break;
+        case "remove":
+          {
+            log.info("Received request to remove product with given id");
+            int id = Integer.parseInt(request.getParameter("id"));
+            ProductsService.removeProductWithId(id);
+            break;
+          }
+        case "edit":
+          {
+            log.info("Received request to get product with id");
+            int id = Integer.parseInt(request.getParameter("id"));
+            Product product = ProductsService.getProductWithId(id);
+            response.setContentType("application/json");
+            response
+                .getWriter()
+                .println(
+                    gson.toJson(
+                        new ProductData(
+                            product.getId(),
+                            product.getName(),
+                            product.getPrice(),
+                            product.getDescription(),
+                            product.getType().getName())));
+            break;
+          }
+      }
     }
-
   }
 
   @Override
@@ -81,7 +87,8 @@ public class ProductsServlet extends HttpServlet {
     String name = parameterMap.get("product-name")[0];
     int price = Integer.parseInt(parameterMap.get("price")[0]);
     String description = parameterMap.get("description")[0];
-    ProductType productType = ProductsService.getProductType(Integer.parseInt(parameterMap.get("type")[0]));
+    ProductType productType =
+        ProductsService.getProductType(Integer.parseInt(parameterMap.get("type")[0]));
     if (urls.length == 2) {
       switch (urls[1]) {
         case "add":

@@ -37,35 +37,39 @@ public class CartServlet extends HttpServlet {
 
     if (request.getPathInfo() == null || request.getPathInfo().equals("/")) {
       log.info("Received request to get all cart items");
-      List<CartService.ShoppingCartProductInfo> cartProducts = CartService.getProductsFromCart(userId);
+      List<CartService.ShoppingCartProductInfo> cartProducts =
+          CartService.getProductsFromCart(userId);
       response
-              .getWriter()
-              .println(gson.toJson(cartProducts.toArray(new CartService.ShoppingCartProductInfo[] {})));
+          .getWriter()
+          .println(gson.toJson(cartProducts.toArray(new CartService.ShoppingCartProductInfo[] {})));
       return;
     }
 
     String[] urls = request.getPathInfo().split("/");
     if (urls.length == 2) {
       switch (urls[1]) {
-        case "add-to-cart": {
-          log.info("Received request to add item to the cart");
-          int productId = Integer.parseInt(request.getParameter("product_id"));
-          int quantity = Integer.parseInt(request.getParameter("quantity"));
-          log.info("Received add product to the cart");
-          CartService.addProductToCart(new ShoppingCartItem(userId, productId, quantity));
-          break;
-        }
-        case "remove-from-cart": {
-          log.info("Received request to remove item from the cart");
-          int cartItemId = Integer.parseInt(request.getParameter("id"));
-          CartService.removeShoppingCartItemWithId(cartItemId);
-          break;
-        }
-        case "remove-all-items": {
-          log.info("Received request to place order");
-          CartService.removeAllItems(userId);
-          break;
-        }
+        case "add-to-cart":
+          {
+            log.info("Received request to add item to the cart");
+            int productId = Integer.parseInt(request.getParameter("product_id"));
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            log.info("Received add product to the cart");
+            CartService.addProductToCart(new ShoppingCartItem(userId, productId, quantity));
+            break;
+          }
+        case "remove-from-cart":
+          {
+            log.info("Received request to remove item from the cart");
+            int cartItemId = Integer.parseInt(request.getParameter("id"));
+            CartService.removeShoppingCartItemWithId(cartItemId);
+            break;
+          }
+        case "remove-all-items":
+          {
+            log.info("Received request to place order");
+            CartService.removeAllItems(userId);
+            break;
+          }
       }
     }
   }
@@ -82,5 +86,4 @@ public class CartServlet extends HttpServlet {
     if (id != null) return Integer.parseInt(id);
     else return -1;
   }
-
 }

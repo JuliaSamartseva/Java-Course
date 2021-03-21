@@ -12,6 +12,7 @@ public class DatabaseConnection {
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
     }
-    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/internetshop", "postgres", "password");
+    return DriverManager.getConnection(
+        "jdbc:postgresql://localhost:5432/internetshop", "postgres", "password");
   }
 }

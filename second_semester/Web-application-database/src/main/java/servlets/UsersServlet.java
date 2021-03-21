@@ -36,9 +36,7 @@ public class UsersServlet extends HttpServlet {
     if (request.getPathInfo() == null || request.getPathInfo().equals("/")) {
       log.info("Received request to get all users");
       List<User> clients = UserService.getClientUsers();
-      response
-              .getWriter()
-              .println(gson.toJson(clients.toArray(new User[] {})));
+      response.getWriter().println(gson.toJson(clients.toArray(new User[] {})));
       return;
     }
 

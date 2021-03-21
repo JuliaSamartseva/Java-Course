@@ -9,6 +9,7 @@ public class Client extends User {
     super(id, name, password, UserType.CLIENT, false);
     shoppingCart = new ArrayList<>();
   }
+
   public Client(int id, String name, String password, boolean blocked) {
     super(id, name, password, UserType.CLIENT, blocked);
     shoppingCart = new ArrayList<>();

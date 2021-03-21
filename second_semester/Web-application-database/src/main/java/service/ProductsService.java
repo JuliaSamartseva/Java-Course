@@ -16,19 +16,19 @@ public class ProductsService {
   private static final Logger log = Logger.getLogger(ProductsService.class.getName());
 
   private static final String editProductQuery =
-          "UPDATE internetshop.public.product SET name = ?, price = ?, description = ?, product_type_id = ? WHERE id = ?";
+      "UPDATE internetshop.public.product SET name = ?, price = ?, description = ?, product_type_id = ? WHERE id = ?";
   private static final String addProductQuery =
-          "INSERT INTO internetshop.public.product(name, price, description, product_type_id) VALUES (?, ?, ?, ?)";
+      "INSERT INTO internetshop.public.product(name, price, description, product_type_id) VALUES (?, ?, ?, ?)";
   private static final String removeProductWithIdQuery =
-          "DELETE FROM internetshop.public.product WHERE product.id = ?";
+      "DELETE FROM internetshop.public.product WHERE product.id = ?";
   private static final String getProductWithIdQuery =
-          "SELECT internetshop.public.product.id, name, price, description, product_type_id FROM internetshop.public.product WHERE product.id = ?";
+      "SELECT internetshop.public.product.id, name, price, description, product_type_id FROM internetshop.public.product WHERE product.id = ?";
   private static final String allProductsQuery =
-          "SELECT product.id, product.name, product.price, product.description, product_type.id, product_type.name, product_type.description FROM internetshop.public.product INNER JOIN internetshop.public.product_type ON product.product_type_id = product_type.id";
+      "SELECT product.id, product.name, product.price, product.description, product_type.id, product_type.name, product_type.description FROM internetshop.public.product INNER JOIN internetshop.public.product_type ON product.product_type_id = product_type.id";
   private static final String allProductTypesQuery =
-          "SELECT product_type.id, name, description FROM internetshop.public.product_type";
+      "SELECT product_type.id, name, description FROM internetshop.public.product_type";
   private static final String getProductTypeQuery =
-          "SELECT product_type.id, name, description FROM internetshop.public.product_type WHERE product_type.id = ?";
+      "SELECT product_type.id, name, description FROM internetshop.public.product_type WHERE product_type.id = ?";
 
   public static void editProduct(Product product) {
     if (product == null) {
@@ -42,8 +42,7 @@ public class ProductsService {
       prepareStatement.setString(3, product.getDescription());
       prepareStatement.setInt(4, product.getType().getId());
       prepareStatement.setInt(5, product.getId());
-      if (prepareStatement.executeUpdate() <= 0)
-        log.warning("Cannot add product.");
+      if (prepareStatement.executeUpdate() <= 0) log.warning("Cannot add product.");
     } catch (IOException | SQLException e) {
       e.printStackTrace();
     }
@@ -63,7 +62,7 @@ public class ProductsService {
         int productTypeId = resultSet.getInt(5);
         List<ProductType> productTypes = getProductTypes();
         ProductType productType = null;
-        for (ProductType pt: productTypes) {
+        for (ProductType pt : productTypes) {
           if (pt.getId() == productTypeId) productType = pt;
         }
         product = new Product(id, name, price, description, productType);
@@ -79,8 +78,7 @@ public class ProductsService {
     try (Connection connection = DatabaseConnection.getConnection()) {
       PreparedStatement prepareStatement = connection.prepareStatement(removeProductWithIdQuery);
       prepareStatement.setInt(1, id);
-      if (prepareStatement.executeUpdate() <= 0)
-        log.warning("Cannot remove product with id "  + id);
+      if (prepareStatement.executeUpdate() <= 0) log.warning("Cannot remove product with id " + id);
     } catch (IOException | SQLException e) {
       e.printStackTrace();
     }
@@ -97,8 +95,7 @@ public class ProductsService {
       prepareStatement.setInt(2, product.getPrice());
       prepareStatement.setString(3, product.getDescription());
       prepareStatement.setInt(4, product.getType().getId());
-      if (prepareStatement.executeUpdate() <= 0)
-        log.warning("Cannot add product.");
+      if (prepareStatement.executeUpdate() <= 0) log.warning("Cannot add product.");
     } catch (IOException | SQLException e) {
       e.printStackTrace();
     }
@@ -129,7 +126,7 @@ public class ProductsService {
       log.info("Connected to the database.");
       PreparedStatement preparedStatement = connection.prepareStatement(allProductTypesQuery);
       ResultSet rs = preparedStatement.executeQuery();
-      while(rs.next()) {
+      while (rs.next()) {
         productTypes.add(getProductTypeFromResultSet(rs));
       }
     } catch (IOException | SQLException e) {
@@ -145,7 +142,7 @@ public class ProductsService {
       log.info("Connected to the database.");
       PreparedStatement ps = connection.prepareStatement(allProductsQuery);
       ResultSet rs = ps.executeQuery();
-      while(rs.next()) {
+      while (rs.next()) {
         int id = rs.getInt(1);
         String name = rs.getString(2);
         int price = rs.getInt(3);
@@ -153,7 +150,13 @@ public class ProductsService {
         int productTypeId = rs.getInt(5);
         String productTypeName = rs.getString(6);
         String productTypeDescription = rs.getString(7);
-        Product product = new Product(id, name, price, description, new ProductType(productTypeId, productTypeName, productTypeDescription));
+        Product product =
+            new Product(
+                id,
+                name,
+                price,
+                description,
+                new ProductType(productTypeId, productTypeName, productTypeDescription));
         products.add(product);
       }
     } catch (IOException | SQLException e) {
@@ -169,4 +172,3 @@ public class ProductsService {
     return new ProductType(id, name, description);
   }
 }
-

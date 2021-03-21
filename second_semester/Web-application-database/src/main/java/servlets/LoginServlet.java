@@ -38,16 +38,12 @@ public class LoginServlet extends HttpServlet {
         response.addCookie(typeCookie);
 
         log.info("Redirecting to " + userInfo.type.toString());
-        response
-                .getWriter()
-                .println(gson.toJson(userInfo.type));
+        response.getWriter().println(gson.toJson(userInfo.type));
       } else {
-        response
-                .getWriter()
-                .println(gson.toJson("blocked"));
+        response.getWriter().println(gson.toJson("blocked"));
       }
     } else {
       response.getWriter().println(gson.toJson("notexists"));
-      }
+    }
   }
 }

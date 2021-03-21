@@ -18,26 +18,26 @@ public class CartService {
   private static final String addProductToShoppingCartQuery =
       "INSERT INTO internetshop.public.shopping_cart(user_id, product_id, quantity) VALUES (?, ?, ?)";
   private static final String getShoppingCartItemQuery =
-          "SELECT shopping_cart.id, quantity FROM internetshop.public.shopping_cart WHERE product_id = ? AND user_id = ?";
+      "SELECT shopping_cart.id, quantity FROM internetshop.public.shopping_cart WHERE product_id = ? AND user_id = ?";
   private static final String updateShoppingCartItemQuery =
-          "UPDATE internetshop.public.shopping_cart SET quantity = ? WHERE id = ?";
+      "UPDATE internetshop.public.shopping_cart SET quantity = ? WHERE id = ?";
   private static final String getProductsFromShoppingCartQuery =
-          "SELECT shopping_cart.id, shopping_cart.quantity, p.name, p.price FROM internetshop.public.shopping_cart INNER JOIN internetshop.public.product p on p.id = shopping_cart.product_id WHERE user_id = ?";
+      "SELECT shopping_cart.id, shopping_cart.quantity, p.name, p.price FROM internetshop.public.shopping_cart INNER JOIN internetshop.public.product p on p.id = shopping_cart.product_id WHERE user_id = ?";
   private static final String removeShoppingCartItemWithIdQuery =
-          "DELETE FROM internetshop.public.shopping_cart WHERE shopping_cart.id = ?";
+      "DELETE FROM internetshop.public.shopping_cart WHERE shopping_cart.id = ?";
 
   public static void removeAllItems(int userId) {
     List<ShoppingCartProductInfo> items = getProductsFromCart(userId);
-    for (ShoppingCartProductInfo item : items)
-      removeShoppingCartItemWithId(item.shoppingCartId);
+    for (ShoppingCartProductInfo item : items) removeShoppingCartItemWithId(item.shoppingCartId);
   }
 
   public static void removeShoppingCartItemWithId(int id) {
     try (Connection connection = DatabaseConnection.getConnection()) {
-      PreparedStatement prepareStatement = connection.prepareStatement(removeShoppingCartItemWithIdQuery);
+      PreparedStatement prepareStatement =
+          connection.prepareStatement(removeShoppingCartItemWithIdQuery);
       prepareStatement.setInt(1, id);
       if (prepareStatement.executeUpdate() <= 0)
-        log.warning("Cannot remove shopping cart item with id "  + id);
+        log.warning("Cannot remove shopping cart item with id " + id);
     } catch (IOException | SQLException e) {
       e.printStackTrace();
     }
@@ -51,12 +51,14 @@ public class CartService {
       PreparedStatement ps = connection.prepareStatement(getProductsFromShoppingCartQuery);
       ps.setInt(1, userId);
       ResultSet rs = ps.executeQuery();
-      while(rs.next()) {
+      while (rs.next()) {
         int shoppingCartId = rs.getInt(1);
         int quantity = rs.getInt(2);
         String productName = rs.getString(3);
         int productPrice = rs.getInt(4);
-        products.add(new ShoppingCartProductInfo(shoppingCartId, productName, productPrice * quantity, quantity));
+        products.add(
+            new ShoppingCartProductInfo(
+                shoppingCartId, productName, productPrice * quantity, quantity));
       }
     } catch (IOException | SQLException e) {
       e.printStackTrace();
@@ -101,7 +103,8 @@ public class CartService {
     public int price;
     public int quantity;
 
-    public ShoppingCartProductInfo(int shoppingCartId, String productName, int price, int quantity) {
+    public ShoppingCartProductInfo(
+        int shoppingCartId, String productName, int price, int quantity) {
       this.shoppingCartId = shoppingCartId;
       this.productName = productName;
       this.price = price;

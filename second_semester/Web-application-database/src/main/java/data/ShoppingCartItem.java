@@ -11,7 +11,6 @@ public class ShoppingCartItem {
     this.quantity = quantity;
   }
 
-
   public int getUserId() {
     return userId;
   }
