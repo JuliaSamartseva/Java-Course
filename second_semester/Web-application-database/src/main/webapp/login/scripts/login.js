@@ -39,10 +39,11 @@ const checkFormInputs =
 
         if (request != null) {
             let reply = JSON.parse(JSON.stringify(request)).toLowerCase();
-            if (reply !== "blocked") window.location.href = `${JSON.parse(JSON.stringify(request)).toLowerCase()}/home.jsp`
-            else formFailure("The user is blocked.")
+            if (reply === "blocked") formFailure("The user is blocked.")
+            else if (reply === "notexists") formFailure("Login details are incorrect.")
+            else window.location.href = `${reply}/home.jsp`
         } else {
-            formFailure("Login details are incorrect.")
+            formFailure("Something went wrong")
         }
 
     }

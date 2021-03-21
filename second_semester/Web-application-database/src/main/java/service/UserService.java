@@ -18,8 +18,10 @@ public class UserService {
       "SELECT users.id, name, password, type, blocked FROM internetshop.public.users WHERE users.id = ?";
   private static final String getAllUsersQuery =
       "SELECT users.id, name, password, type, blocked FROM internetshop.public.users";
+  private static final String checkUserQuery =
+      "SELECT users.id, users.type, users.blocked FROM internetshop.public.users WHERE name = ? AND password = internetshop.public.crypt(?, password)";
   private static final String addUserQuery =
-      "INSERT INTO internetshop.public.users(name, password, blocked, type) VALUES (?, ?, ?, ?::user_type)";
+      "INSERT INTO internetshop.public.users(name, password, blocked, type) VALUES (?, internetshop.public.crypt(?, internetshop.public.gen_salt('bf')), ?, ?::user_type)";
   private static final String changeBlockUserQuery =
       "UPDATE internetshop.public.users SET blocked = ? WHERE id = ?";
 
@@ -55,14 +57,16 @@ public class UserService {
     log.info("Checking username and password");
     try (Connection connection = DatabaseConnection.getConnection()) {
       log.info("Connected to the database.");
-      PreparedStatement ps = connection.prepareStatement(getAllUsersQuery);
+      PreparedStatement ps = connection.prepareStatement(checkUserQuery);
+      ps.setString(1, name);
+      ps.setString(2, password);
       ResultSet rs = ps.executeQuery();
-      while (rs.next()) {
-        User user = getUserFromResultSet(rs);
-        if (user.getName().equals(name) && user.getPassword().equals(password)) {
-          log.info("Found user, redirecting to " + user.getType() + " page");
-          return new UserInfo(user.getId(), user.getType(), user.isBlocked());
-        }
+      if (rs.next()) {
+        int id = rs.getInt(1);
+        UserType type = UserType.valueOf(rs.getString(2));
+        boolean blocked = rs.getBoolean(3);
+        log.info("Found user, redirecting to " + type + " page");
+        return new UserInfo(id, type, blocked);
       }
     } catch (IOException | SQLException e) {
       e.printStackTrace();

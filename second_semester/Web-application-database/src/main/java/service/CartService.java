@@ -26,6 +26,12 @@ public class CartService {
   private static final String removeShoppingCartItemWithIdQuery =
           "DELETE FROM internetshop.public.shopping_cart WHERE shopping_cart.id = ?";
 
+  public static void removeAllItems(int userId) {
+    List<ShoppingCartProductInfo> items = getProductsFromCart(userId);
+    for (ShoppingCartProductInfo item : items)
+      removeShoppingCartItemWithId(item.shoppingCartId);
+  }
+
   public static void removeShoppingCartItemWithId(int id) {
     try (Connection connection = DatabaseConnection.getConnection()) {
       PreparedStatement prepareStatement = connection.prepareStatement(removeShoppingCartItemWithIdQuery);

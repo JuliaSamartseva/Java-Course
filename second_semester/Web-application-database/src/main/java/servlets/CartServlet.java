@@ -61,6 +61,11 @@ public class CartServlet extends HttpServlet {
           CartService.removeShoppingCartItemWithId(cartItemId);
           break;
         }
+        case "remove-all-items": {
+          log.info("Received request to place order");
+          CartService.removeAllItems(userId);
+          break;
+        }
       }
     }
   }

@@ -43,6 +43,9 @@
         </th>
         </thead>
     </table>
+
+    <p id="total-price">Total price = 0</p>
+    <a type="button" id="place-order" class="btn btn-success">Place order</a>
 </div>
 </body>
 <%@ include file="/bootstrap-js.html" %>

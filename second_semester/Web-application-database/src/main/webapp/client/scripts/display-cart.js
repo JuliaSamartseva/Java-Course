@@ -1,4 +1,10 @@
 window.onload = async () => {
+    document.getElementById('place-order').onclick = async function () {
+        await fetch(`../servlets/cart/remove-all-items`);
+        window.location.reload();
+        alert("Order was successfully placed.");
+    }
+
     document.getElementById('logout').onclick = async function () {
         await fetch(`../servlets/logout`, {
             method: 'POST'
@@ -45,8 +51,13 @@ const populateTable = async () => {
             return row;
         };
 
+    var fullPrice = 0;
+
     for (let request of requests) {
+        fullPrice += request.price;
         const row = createRow(request.shoppingCartId, request.productName, request.price, request.quantity);
         table.appendChild(row);
     }
+
+    document.getElementById('total-price').innerText = "Total price = " + fullPrice;
 }

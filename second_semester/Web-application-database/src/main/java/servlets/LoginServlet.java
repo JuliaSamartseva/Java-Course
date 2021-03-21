@@ -46,6 +46,8 @@ public class LoginServlet extends HttpServlet {
                 .getWriter()
                 .println(gson.toJson("blocked"));
       }
-    }
+    } else {
+      response.getWriter().println(gson.toJson("notexists"));
+      }
   }
 }
