@@ -42,6 +42,14 @@ public class User {
     this.name = name;
   }
 
+  public boolean isBlocked() {
+    return blocked;
+  }
+
+  public void setBlocked(boolean blocked) {
+    this.blocked = blocked;
+  }
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj) return true;

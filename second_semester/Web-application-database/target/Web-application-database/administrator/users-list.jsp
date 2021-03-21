@@ -8,6 +8,18 @@
     <script src="scripts/display-users.js"></script>
 </head>
 <body>
+<%
+    String userName = null;
+    String type = "";
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("user")) userName = cookie.getValue();
+            else if (cookie.getName().equals("type")) type = cookie.getValue();
+        }
+    }
+    if (userName == null || !type.equals("administrator")) response.sendRedirect("http://localhost:8080/Web_application_database_war/login.jsp");
+%>
 <div class="container" id="container">
     <br>
     <h3 class="text-center">Products View</h3>

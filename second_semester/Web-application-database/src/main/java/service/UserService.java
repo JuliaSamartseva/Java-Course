@@ -16,20 +16,19 @@ public class UserService {
 
   private static final String userByIdQuery =
       "SELECT users.id, name, password, type, blocked FROM internetshop.public.users WHERE users.id = ?";
-  private static final String getAllClientUsersQuery =
-          "SELECT users.id, name, password, type, blocked FROM internetshop.public.users";
+  private static final String getAllUsersQuery =
+      "SELECT users.id, name, password, type, blocked FROM internetshop.public.users";
   private static final String addUserQuery =
       "INSERT INTO internetshop.public.users(name, password, blocked, type) VALUES (?, ?, ?, ?::user_type)";
   private static final String changeBlockUserQuery =
-          "UPDATE internetshop.public.users SET blocked = ? WHERE id = ?";
+      "UPDATE internetshop.public.users SET blocked = ? WHERE id = ?";
 
   public static void editBlocked(int id, boolean blocked) {
     try (Connection connection = DatabaseConnection.getConnection()) {
       PreparedStatement prepareStatement = connection.prepareStatement(changeBlockUserQuery);
       prepareStatement.setBoolean(1, blocked);
       prepareStatement.setInt(2, id);
-      if (prepareStatement.executeUpdate() <= 0)
-        log.warning("Cannot change blocked status.");
+      if (prepareStatement.executeUpdate() <= 0) log.warning("Cannot change blocked status.");
     } catch (IOException | SQLException e) {
       e.printStackTrace();
     }
@@ -46,11 +45,35 @@ public class UserService {
       prepareStatement.setString(2, user.getPassword());
       prepareStatement.setBoolean(3, false);
       prepareStatement.setString(4, String.valueOf(user.getType()));
-      if (prepareStatement.executeUpdate() <= 0)
-        log.warning("Cannot register user.");
+      if (prepareStatement.executeUpdate() <= 0) log.warning("Cannot register user.");
     } catch (IOException | SQLException e) {
       e.printStackTrace();
     }
+  }
+
+  public static UserType findUser(String name, String password) {
+    log.info("Checking username and password");
+    try (Connection connection = DatabaseConnection.getConnection()) {
+      log.info("Connected to the database.");
+      PreparedStatement ps = connection.prepareStatement(getAllUsersQuery);
+      ResultSet rs = ps.executeQuery();
+      while (rs.next()) {
+        User user = getUserFromResultSet(rs);
+        if (user.getName().equals(name) && user.getPassword().equals(password)) {
+          if (user.isBlocked()) {
+            log.info("The user is blocked");
+            return null;
+          }
+          else {
+            log.info("Found user, redirecting to " + user.getType() + " page");
+            return user.getType();
+          }
+        }
+      }
+    } catch (IOException | SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   public static List<User> getClientUsers() {
@@ -58,9 +81,9 @@ public class UserService {
     List<User> users = new ArrayList<>();
     try (Connection connection = DatabaseConnection.getConnection()) {
       log.info("Connected to the database.");
-      PreparedStatement ps = connection.prepareStatement(getAllClientUsersQuery);
+      PreparedStatement ps = connection.prepareStatement(getAllUsersQuery);
       ResultSet rs = ps.executeQuery();
-      while(rs.next()) {
+      while (rs.next()) {
         User user = getUserFromResultSet(rs);
         if (user.getType() == UserType.CLIENT) users.add(user);
       }

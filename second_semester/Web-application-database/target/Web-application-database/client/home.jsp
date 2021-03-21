@@ -8,14 +8,28 @@
     <script src="../products/scripts/products-client.js"></script>
 </head>
 <body>
+<%
+    String userName = null;
+    String type = "";
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("user")) userName = cookie.getValue();
+            else if (cookie.getName().equals("type")) type = cookie.getValue();
+        }
+    }
+    if (userName == null || !type.equals("client")) response.sendRedirect("http://localhost:8080/Web_application_database_war/login.jsp");
+%>
+
 <div class="container" id="container">
     <br>
     <h3 class="text-center">Products View</h3>
     <hr>
-    <a class="btn btn-secondary" href="http://localhost:8080/Web_application_database_war" role="button">Log out</a>
-    <a type="button" class="btn btn-dark float-right" href="http://localhost:8080/Web_application_database_war/products/">Cart</a>
+    <button class="btn btn-secondary" id="logout" role="button">Log out</button>
+    <a type="button" class="btn btn-dark float-right"
+       href="http://localhost:8080/Web_application_database_war/products/">Cart</a>
     <hr>
-    <%@ include file = "../products/products.html" %>
+    <%@ include file="../products/products.html" %>
 </div>
 </body>
 <%@ include file="/bootstrap-js.html" %>

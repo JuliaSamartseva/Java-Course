@@ -1,4 +1,10 @@
 window.onload = async () => {
+    document.getElementById('logout').onclick = async function () {
+        await fetch(`../servlets/logout`, {
+            method: 'POST'
+        });
+        window.location = "http://localhost:8080/Web_application_database_war/login.jsp"
+    }
     await populateTable();
 }
 
@@ -51,7 +57,7 @@ const populateTable = async () => {
             addToCart.className = "badge badge-dark";
             addToCart.style.marginRight = "10px";
             addToCart.onclick = async function () {
-                await fetch(`../servlets/products/add-to-cart?id=${id}&quantity=${quantity.value}`)
+                await fetch(`../servlets/products/add-to-cart?product_id=${id}&quantity=${quantity.value}`)
                 alert("Added product to the cart.")
             }
 
