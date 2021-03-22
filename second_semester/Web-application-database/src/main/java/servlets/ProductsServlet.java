@@ -81,6 +81,14 @@ public class ProductsServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) {
+    if (response == null) {
+      throw new IllegalArgumentException("Response must not be null.");
+    }
+
+    if (request == null) {
+      throw new IllegalArgumentException("Request must not be null.");
+    }
+
     String[] urls = request.getPathInfo().split("/");
     log.info("Received data from the product editor. Adding the product to the database.");
     Map<String, String[]> parameterMap = request.getParameterMap();

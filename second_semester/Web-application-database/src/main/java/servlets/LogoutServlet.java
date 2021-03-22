@@ -15,6 +15,15 @@ public class LogoutServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     log.info("Received logout request.");
+
+    if (response == null) {
+      throw new IllegalArgumentException("Response must not be null.");
+    }
+
+    if (request == null) {
+      throw new IllegalArgumentException("Request must not be null.");
+    }
+
     Cookie loginCookie = new Cookie("user", "");
     Cookie typeCookie = new Cookie("type", "");
     loginCookie.setPath("/");

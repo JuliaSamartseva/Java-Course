@@ -25,6 +25,14 @@ public class RegistrationServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) {
+    if (response == null) {
+      throw new IllegalArgumentException("Response must not be null.");
+    }
+
+    if (request == null) {
+      throw new IllegalArgumentException("Request must not be null.");
+    }
+
     log.info("Received data from the registration.");
     Map<String, String[]> parameterMap = request.getParameterMap();
     String name = parameterMap.get("username")[0];
@@ -39,11 +47,11 @@ public class RegistrationServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     if (response == null) {
-      throw new IllegalArgumentException("response cannot be null");
+      throw new IllegalArgumentException("Response must not be null.");
     }
 
     if (request == null) {
-      throw new IllegalArgumentException("request cannot be null");
+      throw new IllegalArgumentException("Request must not be null.");
     }
 
     ServletContext servletContext = getServletContext();

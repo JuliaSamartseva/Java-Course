@@ -1,8 +1,6 @@
 package servlets;
 
 import com.google.gson.Gson;
-import data.User;
-import data.UserType;
 import service.UserService;
 
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +19,15 @@ public class LoginServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     log.info("Received data from logging in.");
+
+    if (response == null) {
+      throw new IllegalArgumentException("Response must not be null.");
+    }
+
+    if (request == null) {
+      throw new IllegalArgumentException("Request must not be null.");
+    }
+
     Map<String, String[]> parameterMap = request.getParameterMap();
     String name = parameterMap.get("username")[0];
     String password = parameterMap.get("password")[0];
@@ -40,9 +47,11 @@ public class LoginServlet extends HttpServlet {
         log.info("Redirecting to " + userInfo.type.toString());
         response.getWriter().println(gson.toJson(userInfo.type));
       } else {
+        log.info("User is blocked");
         response.getWriter().println(gson.toJson("blocked"));
       }
     } else {
+      log.info("User doesn't exist");
       response.getWriter().println(gson.toJson("notexists"));
     }
   }
