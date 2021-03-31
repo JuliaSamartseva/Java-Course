@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import webapp.entity.User;
+import webapp.entity.UserType;
 import webapp.service.UserService;
 
 import javax.validation.Valid;
@@ -35,6 +36,6 @@ public class RegistrationController {
       return "registration";
     }
 
-    return "redirect:/";
+    return "redirect:/login";
   }
 }

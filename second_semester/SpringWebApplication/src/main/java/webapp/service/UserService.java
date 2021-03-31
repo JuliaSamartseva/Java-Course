@@ -59,7 +59,7 @@ public class UserService implements UserDetailsService {
     if (user.getType() == UserType.ADMINISTRATOR) {
       user.setRoles(Collections.singleton(new Role(1L, "ROLE_ADMIN")));
     } else if (user.getType() == UserType.CLIENT) {
-      user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+      user.setRoles(Collections.singleton(new Role(2L, "ROLE_USER")));
     }
     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 

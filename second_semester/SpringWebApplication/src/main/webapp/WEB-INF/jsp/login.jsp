@@ -22,15 +22,14 @@
             <article class="card-body mx-auto" style="max-width: 400px;">
                 <h4 class="card-title mt-3 text-center">Log into your account</h4>
                 <br>
-                <form method="POST" action="/login">
+                <form method="POST" action="${pageContext.request.contextPath}/login">
                     <div class="form-group">
                         <label for="username">User Name</label>
-                        <input name="username"
-                               type="text"
+                        <input class="form-control col"
                                id="username"
+                               name="username"
                                placeholder="Username"
-                               autofocus="true"
-                               class="form-control col" />
+                               type="text" />
                     </div>
                     <div class="form-group">
                         <label for="password">Password:</label>
