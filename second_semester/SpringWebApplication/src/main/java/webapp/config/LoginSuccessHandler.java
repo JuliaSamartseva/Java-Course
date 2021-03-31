@@ -8,6 +8,7 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import webapp.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,6 +53,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         return roleTargetUrlMap.get(authorityName);
       }
     }
+
     throw new IllegalStateException();
   }
 

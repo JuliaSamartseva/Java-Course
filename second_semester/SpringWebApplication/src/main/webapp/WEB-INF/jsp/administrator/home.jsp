@@ -13,7 +13,7 @@
     <br>
     <h3 class="text-center">Products View</h3>
     <hr>
-    <a type="button" class="btn btn-primary" href="${pageContext.request.contextPath}/users">Users</a>
+    <a type="button" class="btn btn-primary" href="${pageContext.request.contextPath}/administrator/users">Users</a>
     <sec:authorize access="isAuthenticated()">
         <a class="btn btn-secondary" id="logout" role="button" href="${pageContext.request.contextPath}/logout">Log out</a>
     </sec:authorize>

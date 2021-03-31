@@ -40,6 +40,14 @@ public class UserService implements UserDetailsService {
     return user;
   }
 
+  public void blockUser(Long userId) {
+    userRepository.changeBlockForUserWithId(userId, true);
+  }
+
+  public void unblockUser(Long userId) {
+    userRepository.changeBlockForUserWithId(userId, false);
+  }
+
   public User findUserById(Long userId) {
     Optional<User> userFromDb = userRepository.findById(userId);
     return userFromDb.orElse(new User());
@@ -73,10 +81,5 @@ public class UserService implements UserDetailsService {
       return true;
     }
     return false;
-  }
-
-  public List<User> usergtList(Long idMin) {
-    return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
-            .setParameter("paramId", idMin).getResultList();
   }
 }

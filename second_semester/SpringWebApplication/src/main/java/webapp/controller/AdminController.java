@@ -1,12 +1,11 @@
 package webapp.controller;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import webapp.entity.User;
 import webapp.service.UserService;
 
 @Controller
@@ -21,8 +20,26 @@ public class AdminController {
 
   @GetMapping("/administrator/users")
   public String userList(Model model) {
-    model.addAttribute("allUsers", userService.allUsers());
     return "/administrator/users";
+  }
+
+  @GetMapping(path = "/get-users", produces = "application/json")
+  @ResponseBody
+  public String getUsers(Model model) {
+    Gson gson = new Gson();
+    return gson.toJson(userService.allUsers().toArray(new User[] {}));
+  }
+
+  @GetMapping( "/block-user/{id}")
+  @ResponseBody
+  public void blockUser(@PathVariable Long id) {
+    userService.blockUser(id);
+  }
+
+  @GetMapping("/unblock-user/{id}")
+  @ResponseBody
+  public void unblockUser(@PathVariable Long id) {
+    userService.unblockUser(id);
   }
 
   @PostMapping("/administrator/users")
@@ -35,9 +52,4 @@ public class AdminController {
     return "/administrator/users";
   }
 
-  @GetMapping("/administrator/users/gt/{userId}")
-  public String  gtUser(@PathVariable("userId") Long userId, Model model) {
-    model.addAttribute("allUsers", userService.usergtList(userId));
-    return "/administrator/users";
-  }
 }
