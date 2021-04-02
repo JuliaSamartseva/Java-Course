@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import webapp.entity.User;
 import webapp.service.UserService;
 
+import java.security.Principal;
+import java.util.List;
+
 @Controller
 public class AdminController {
   @Autowired
@@ -25,9 +28,12 @@ public class AdminController {
 
   @GetMapping(path = "/get-users", produces = "application/json")
   @ResponseBody
-  public String getUsers(Model model) {
+  public String getUsers(Model model, Principal principal) {
+    String userName = principal.getName();
     Gson gson = new Gson();
-    return gson.toJson(userService.allUsers().toArray(new User[] {}));
+    List<User> userList = userService.allUsers();
+    userList.removeIf(current -> current.getName().equals(userName));
+    return gson.toJson(userList.toArray(new User[] {}));
   }
 
   @GetMapping( "/block-user/{id}")

@@ -78,7 +78,6 @@ public class ProductsController {
   }
 
   @GetMapping( "/remove-product/{id}")
-  @ResponseBody
   public void removeProduct(@PathVariable int id) {
     productService.removeProduct(id);
   }

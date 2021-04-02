@@ -40,6 +40,10 @@ public class UserService implements UserDetailsService {
     return user;
   }
 
+  public User getUserByUsername(String name) {
+    return userRepository.findByName(name);
+  }
+
   public void blockUser(Long userId) {
     userRepository.changeBlockForUserWithId(userId, true);
   }
