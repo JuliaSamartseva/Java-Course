@@ -4,7 +4,7 @@ window.onload = async () => {
 
 const populateTable = async () => {
     const table = document.getElementById('products');
-    const res = await fetch('/products');
+    const res = await fetch('/get-products');
     const requests = await res.json();
 
     const createRow =
@@ -37,13 +37,13 @@ const populateTable = async () => {
             editButton.className = "badge badge-dark";
             editButton.style.marginRight = "10px";
             editButton.onclick = function () {
-                window.location = `http://localhost:8080/Web_application_database_war/products/product-manager.jsp?id=${request.productId}`;
+                window.location = `/administrator/product-manager/${request.id}`;
             }
             let removeButton = document.createElement("button");
             removeButton.innerText = "remove";
             removeButton.className = "badge badge-dark";
             removeButton.onclick = async function () {
-                await fetch(`../servlets/products/remove?id=${request.productId}`);
+                await fetch(`/remove-product/${request.id}`);
                 window.location.reload();
             }
             actions.appendChild(editButton);
@@ -53,7 +53,7 @@ const populateTable = async () => {
         }
 
     for (let request of requests) {
-        const row = createRow(request.name, request.price, request.description, request.productType);
+        const row = createRow(request.name, request.price, request.description, request.type.name);
         row.appendChild(changeButtons(request));
         table.appendChild(row);
     }

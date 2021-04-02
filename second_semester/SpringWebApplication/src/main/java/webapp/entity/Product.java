@@ -1,10 +1,31 @@
 package webapp.entity;
 
+import org.hibernate.validator.constraints.Range;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = "product")
 public class Product {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(updatable = false)
   private int id;
+
+  @Size(min = 3, max = 20, message = "min = 3, max = 20 symbols")
+  @NotNull(message = "Name cannot be null")
   private String name;
+
+  @Range(min=0)
+  @NotNull
   private int price;
+
   private String description;
+
+  @ManyToOne
+  @JoinColumn(name = "product_type_id", nullable = false)
   private ProductType type;
 
   public Product() {}

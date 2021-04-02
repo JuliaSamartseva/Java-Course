@@ -1,33 +1,32 @@
 package webapp.entity;
 
-public class ShoppingCartItem {
+import javax.persistence.*;
 
-  private int userId;
-  private int productId;
+@Entity
+@Table(name = "shopping_cart")
+public class ShoppingCartItem {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(updatable = false)
+  private int id;
+
+  @ManyToOne
+  @JoinColumn(name = "user_id", nullable = false, updatable = false)
+  private User user;
+
+  @ManyToOne
+  @JoinColumn(name="product_id")
+  private Product product;
+
   private int quantity;
 
   public ShoppingCartItem() {}
 
-  public ShoppingCartItem(int userId, int productId, int quantity) {
-    this.userId = userId;
-    this.productId = productId;
+  public ShoppingCartItem(int id, User user, Product product, int quantity) {
+    this.id = id;
+    this.user = user;
+    this.product = product;
     this.quantity = quantity;
-  }
-
-  public int getUserId() {
-    return userId;
-  }
-
-  public void setUserId(int userId) {
-    this.userId = userId;
-  }
-
-  public int getProductId() {
-    return productId;
-  }
-
-  public void setProductId(int productId) {
-    this.productId = productId;
   }
 
   public int getQuantity() {
@@ -36,5 +35,29 @@ public class ShoppingCartItem {
 
   public void setQuantity(int quantity) {
     this.quantity = quantity;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public Product getProduct() {
+    return product;
+  }
+
+  public void setProduct(Product product) {
+    this.product = product;
   }
 }

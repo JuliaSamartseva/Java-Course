@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Product List</title>
     <%@ include file="../../bootstrap-css.html" %>
-    <script src="../products/scripts/products-administrator.js"></script>
+    <script src="${pageContext.request.contextPath}/js/products-administrator.js"></script>
 </head>
 <body>
 <div class="container" id="container">
@@ -17,7 +17,7 @@
     <sec:authorize access="isAuthenticated()">
         <a class="btn btn-secondary" id="logout" role="button" href="${pageContext.request.contextPath}/logout">Log out</a>
     </sec:authorize>
-    <a type="button" class="btn btn-dark float-right" href="">Add product</a>
+    <a type="button" class="btn btn-dark float-right" href="${pageContext.request.contextPath}/administrator/product-manager">Add product</a>
     <hr>
     <%@ include file = "../products/products.html" %>
 </div>
