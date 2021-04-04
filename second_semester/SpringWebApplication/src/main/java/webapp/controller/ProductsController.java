@@ -8,7 +8,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import webapp.entity.Product;
 import webapp.entity.ProductType;
-import webapp.entity.User;
 import webapp.service.ProductService;
 
 import javax.validation.Valid;
@@ -32,7 +31,7 @@ public class ProductsController {
   }
 
   @PostMapping("/administrator/product-manager")
-  public String addProduct(@ModelAttribute("productForm") @Valid Product productForm, Model model, BindingResult bindingResult) {
+  public String addProduct(@ModelAttribute("productForm") @Valid Product productForm, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return "administrator/product-manager";
     }
@@ -52,20 +51,19 @@ public class ProductsController {
     productForm.setType(productService.getTypeById(productForm.getType().getId()));
     productService.addProduct(productForm);
 
-
     return "redirect:/administrator/home";
   }
 
   @GetMapping(path = "/get-products", produces = "application/json")
   @ResponseBody
-  public String getProducts(Model model) {
+  public String getProducts() {
     Gson gson = new Gson();
     return gson.toJson(productService.allProducts().toArray(new Product[] {}));
   }
 
   @GetMapping(path = "/get-product-types", produces = "application/json")
   @ResponseBody
-  public String getProductTypes(Model model) {
+  public String getProductTypes() {
     Gson gson = new Gson();
     return gson.toJson(productService.allProductTypes().toArray(new ProductType[] {}));
   }

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import webapp.entity.User;
-import webapp.entity.UserType;
 import webapp.service.UserService;
 
 import javax.validation.Valid;
@@ -18,6 +17,11 @@ public class RegistrationController {
 
   @Autowired
   private UserService userService;
+
+  @GetMapping("/")
+  public String registration() {
+    return "redirect:/client/home";
+  }
 
   @GetMapping("/registration")
   public String registration(Model model) {
@@ -31,11 +35,12 @@ public class RegistrationController {
     if (bindingResult.hasErrors()) {
       return "registration";
     }
+
     if (!userService.saveUser(userForm)){
       model.addAttribute("usernameError", "User with such username exists");
       return "registration";
     }
 
-    return "redirect:/login";
+    return "redirect:/client/home";
   }
 }

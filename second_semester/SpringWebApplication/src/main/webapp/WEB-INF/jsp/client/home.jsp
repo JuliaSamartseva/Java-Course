@@ -28,5 +28,5 @@
     <%@ include file="../products/products.html" %>
 </div>
 </body>
-</body>
+<%@ include file="../../bootstrap-js.html" %>
 </html>
