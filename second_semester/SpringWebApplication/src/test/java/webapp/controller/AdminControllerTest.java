@@ -1,33 +1,33 @@
 package webapp.controller;
 
 import com.google.gson.Gson;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import webapp.entity.User;
 import webapp.entity.UserType;
 import webapp.service.UserService;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AdminControllerTest {
-  @Spy
-  @InjectMocks private final AdminController adminController = new AdminController();
+  @Spy @InjectMocks private final AdminController adminController = new AdminController();
 
   @Mock private final UserService userService = new UserService();
 
-  @Mock
-  private KeycloakAuthenticationToken authentication;
+  @Mock private KeycloakAuthenticationToken authentication;
 
   @BeforeEach
   void injectDependencies() {
@@ -64,10 +64,13 @@ public class AdminControllerTest {
     user.setId(1);
     user.setName("testUser");
 
-    doAnswer(i->{
-      user.setBlocked(true);
-      return null;
-    }).when(userService).blockUser(1L);
+    doAnswer(
+            i -> {
+              user.setBlocked(true);
+              return null;
+            })
+        .when(userService)
+        .blockUser(1L);
 
     adminController.blockUser(1L);
     assertTrue(user.isBlocked());
@@ -80,13 +83,15 @@ public class AdminControllerTest {
     user.setName("testUser");
     user.setBlocked(true);
 
-    doAnswer(i->{
-      user.setBlocked(false);
-      return null;
-    }).when(userService).unblockUser(1L);
+    doAnswer(
+            i -> {
+              user.setBlocked(false);
+              return null;
+            })
+        .when(userService)
+        .unblockUser(1L);
 
     adminController.unblockUser(1L);
     assertFalse(user.isBlocked());
   }
-
 }

@@ -18,7 +18,7 @@ public class Product {
   @NotNull(message = "Name cannot be null")
   private String name;
 
-  @Range(min=0)
+  @Range(min = 0)
   @NotNull
   private int price;
 

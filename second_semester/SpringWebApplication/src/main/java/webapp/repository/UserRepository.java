@@ -10,11 +10,11 @@ import webapp.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
   User findByName(String name);
+
   User findById(int id);
 
   @Transactional
   @Modifying
-  @Query(value = "UPDATE users SET blocked = ?2 WHERE id = ?1",
-          nativeQuery = true)
+  @Query(value = "UPDATE users SET blocked = ?2 WHERE id = ?1", nativeQuery = true)
   void changeBlockForUserWithId(Long id, boolean blocked);
 }

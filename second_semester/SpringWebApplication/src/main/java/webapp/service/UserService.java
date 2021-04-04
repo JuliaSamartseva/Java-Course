@@ -15,17 +15,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.logging.Logger;
 
 @Service
 public class UserService {
-  @PersistenceContext
-  private EntityManager em;
-  @Autowired
-  UserRepository userRepository;
-  @Autowired
-  RoleRepository roleRepository;
+  @Autowired UserRepository userRepository;
+  @Autowired RoleRepository roleRepository;
+  @PersistenceContext private EntityManager em;
 
   public void blockUser(Long userId) {
     userRepository.changeBlockForUserWithId(userId, true);

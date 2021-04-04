@@ -14,7 +14,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import webapp.entity.Role;
 import webapp.entity.User;
 import webapp.entity.UserType;
-import webapp.repository.*;
+import webapp.repository.RoleRepository;
+import webapp.repository.UserRepository;
 
 import java.util.Collections;
 
@@ -23,29 +24,14 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
-  @InjectMocks
-  private final UserService userService = new UserService();
-
-  @Mock
-  private UserRepository userRepository;
-
-  @Mock
-  private RoleRepository roleRepository;
-
-  @Mock
-  KeycloakAuthenticationToken authentication;
-
-  @Mock
-  AccessToken accessToken;
-
-  @Mock
-  SimpleKeycloakAccount account;
-
-  @Mock
-  RefreshableKeycloakSecurityContext context;
-
-  @Captor
-  ArgumentCaptor<String> captor;
+  @InjectMocks private final UserService userService = new UserService();
+  @Mock KeycloakAuthenticationToken authentication;
+  @Mock AccessToken accessToken;
+  @Mock SimpleKeycloakAccount account;
+  @Mock RefreshableKeycloakSecurityContext context;
+  @Captor ArgumentCaptor<String> captor;
+  @Mock private UserRepository userRepository;
+  @Mock private RoleRepository roleRepository;
 
   @Test
   public void testGetUserId() {

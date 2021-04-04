@@ -9,5 +9,6 @@ import webapp.entity.Product;
 public interface ProductRepository extends JpaRepository<Product, Long> {
   @Transactional
   void deleteProductById(int id);
+
   Product findById(int id);
 }

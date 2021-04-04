@@ -15,8 +15,7 @@ import javax.validation.Valid;
 @Controller
 public class ProductsController {
 
-  @Autowired
-  private ProductService productService;
+  @Autowired private ProductService productService;
 
   @GetMapping("/administrator/product-manager/{id}")
   public String showProduct(@PathVariable(required = false) Integer id, Model model) {
@@ -31,7 +30,8 @@ public class ProductsController {
   }
 
   @PostMapping("/administrator/product-manager")
-  public String addProduct(@ModelAttribute("productForm") @Valid Product productForm, BindingResult bindingResult) {
+  public String addProduct(
+      @ModelAttribute("productForm") @Valid Product productForm, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return "administrator/product-manager";
     }
@@ -43,7 +43,10 @@ public class ProductsController {
   }
 
   @PostMapping("/administrator/product-manager/{id}")
-  public String editProduct(@PathVariable(required = false) Integer id, @ModelAttribute("productForm") @Valid Product productForm, BindingResult bindingResult) {
+  public String editProduct(
+      @PathVariable(required = false) Integer id,
+      @ModelAttribute("productForm") @Valid Product productForm,
+      BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return "administrator/product-manager";
     }
@@ -75,9 +78,8 @@ public class ProductsController {
     return gson.toJson(productService.getProductById(id));
   }
 
-  @GetMapping( "/remove-product/{id}")
+  @GetMapping("/remove-product/{id}")
   public void removeProduct(@PathVariable int id) {
     productService.removeProduct(id);
   }
-
 }

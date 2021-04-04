@@ -24,23 +24,12 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductServiceTest {
-  @InjectMocks
-  private final ProductService productService = new ProductService();
-
-  @Mock
-  private ProductRepository productRepository;
-
-  @Mock
-  private ProductTypesRepository productTypesRepository;
-
-  @Mock
-  private ShoppingItemsRepository shoppingItemsRepository;
-
-  @Mock
-  private UserRepository userRepository;
-
-  @Captor
-  ArgumentCaptor<ShoppingCartItem> captor;
+  @InjectMocks private final ProductService productService = new ProductService();
+  @Captor ArgumentCaptor<ShoppingCartItem> captor;
+  @Mock private ProductRepository productRepository;
+  @Mock private ProductTypesRepository productTypesRepository;
+  @Mock private ShoppingItemsRepository shoppingItemsRepository;
+  @Mock private UserRepository userRepository;
 
   @Test
   public void testAddNonNullShoppingItem() {

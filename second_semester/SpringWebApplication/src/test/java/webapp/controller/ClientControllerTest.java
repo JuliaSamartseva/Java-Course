@@ -23,17 +23,13 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClientControllerTest {
-  @InjectMocks
-  private final ClientController clientController = new ClientController();
+  @InjectMocks private final ClientController clientController = new ClientController();
 
-  @Mock
-  private final UserService userService = new UserService();
+  @Mock private final UserService userService = new UserService();
 
-  @Mock
-  private final ProductService productService = new ProductService();
+  @Mock private final ProductService productService = new ProductService();
 
-  @Mock
-  private KeycloakAuthenticationToken authentication;
+  @Mock private KeycloakAuthenticationToken authentication;
 
   @BeforeEach
   void injectDependencies() {
@@ -73,7 +69,9 @@ public class ClientControllerTest {
     when(productService.allShoppingCartItems(1)).thenReturn(items);
     when(userService.getUserId(authentication)).thenReturn(1);
     Gson gson = new Gson();
-    assertEquals(clientController.getShoppingCartItems(authentication), gson.toJson(items.toArray(new ShoppingCartItem[] {})));
+    assertEquals(
+        clientController.getShoppingCartItems(authentication),
+        gson.toJson(items.toArray(new ShoppingCartItem[] {})));
   }
 
   @Test

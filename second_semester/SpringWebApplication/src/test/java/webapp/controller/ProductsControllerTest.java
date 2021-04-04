@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import webapp.entity.Product;
 import webapp.entity.ProductType;
 import webapp.service.ProductService;
-import webapp.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +22,10 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductsControllerTest {
-  @InjectMocks
-  ProductsController productsController = new ProductsController();
-  @Mock
-  private final ProductService productService = new ProductService();
-
-  @Mock
-  private Model model;
-
-  @Mock
-  BindingResult bindingResult;
+  @Mock private final ProductService productService = new ProductService();
+  @InjectMocks ProductsController productsController = new ProductsController();
+  @Mock BindingResult bindingResult;
+  @Mock private Model model;
 
   @BeforeEach
   void injectDependencies() {
@@ -50,14 +43,16 @@ public class ProductsControllerTest {
     when(bindingResult.hasErrors()).thenReturn(true);
     Product product = new Product(1, "name", 20, "Description", new ProductType());
     when(bindingResult.hasErrors()).thenReturn(true);
-    assertEquals(productsController.addProduct(product, bindingResult), "administrator/product-manager");
+    assertEquals(
+        productsController.addProduct(product, bindingResult), "administrator/product-manager");
   }
 
   @Test
   public void testAddProduct() {
     when(bindingResult.hasErrors()).thenReturn(false);
     Product product = new Product(1, "name", 20, "Description", new ProductType());
-    assertEquals(productsController.addProduct(product, bindingResult), "redirect:/administrator/home");
+    assertEquals(
+        productsController.addProduct(product, bindingResult), "redirect:/administrator/home");
   }
 
   @Test
@@ -65,14 +60,16 @@ public class ProductsControllerTest {
     when(bindingResult.hasErrors()).thenReturn(true);
     Product product = new Product(1, "name", 20, "Description", new ProductType());
     when(bindingResult.hasErrors()).thenReturn(true);
-    assertEquals(productsController.editProduct(1, product, bindingResult), "administrator/product-manager");
+    assertEquals(
+        productsController.editProduct(1, product, bindingResult), "administrator/product-manager");
   }
 
   @Test
   public void testEditProduct() {
     when(bindingResult.hasErrors()).thenReturn(false);
     Product product = new Product(1, "name", 20, "Description", new ProductType());
-    assertEquals(productsController.editProduct(1, product, bindingResult), "redirect:/administrator/home");
+    assertEquals(
+        productsController.editProduct(1, product, bindingResult), "redirect:/administrator/home");
   }
 
   @Test
@@ -82,7 +79,8 @@ public class ProductsControllerTest {
     productList.add(product);
     when(productService.allProducts()).thenReturn(productList);
     Gson gson = new Gson();
-    assertEquals(productsController.getProducts(), gson.toJson(productList.toArray(new Product[] {})));
+    assertEquals(
+        productsController.getProducts(), gson.toJson(productList.toArray(new Product[] {})));
   }
 
   @Test
@@ -92,7 +90,9 @@ public class ProductsControllerTest {
     productTypesList.add(productType);
     when(productService.allProductTypes()).thenReturn(productTypesList);
     Gson gson = new Gson();
-    assertEquals(productsController.getProductTypes(), gson.toJson(productTypesList.toArray(new ProductType[] {})));
+    assertEquals(
+        productsController.getProductTypes(),
+        gson.toJson(productTypesList.toArray(new ProductType[] {})));
   }
 
   @Test
@@ -102,5 +102,4 @@ public class ProductsControllerTest {
     Gson gson = new Gson();
     assertEquals(productsController.getProductWithId(1), gson.toJson(product));
   }
-
 }

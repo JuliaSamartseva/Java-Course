@@ -15,6 +15,7 @@ public class ProductType {
   @Size(min = 3, max = 20, message = "min = 3, max = 20 symbols")
   @NotNull(message = "Name cannot be null")
   private String name;
+
   private String description;
 
   public ProductType() {}
@@ -27,6 +28,10 @@ public class ProductType {
 
   public int getId() {
     return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public String getName() {
@@ -43,9 +48,5 @@ public class ProductType {
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 }

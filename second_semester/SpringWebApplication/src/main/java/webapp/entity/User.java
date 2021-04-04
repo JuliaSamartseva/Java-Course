@@ -52,6 +52,10 @@ public class User {
     return password;
   }
 
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
   public String getUsername() {
     return name;
   }
@@ -94,10 +98,6 @@ public class User {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
   }
 
   public boolean isBlocked() {

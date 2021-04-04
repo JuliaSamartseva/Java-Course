@@ -40,7 +40,6 @@ public class ClientController {
     return "redirect:/client/home";
   }
 
-
   @GetMapping("/add-to-cart/product_id/{id}/quantity/{quantity}")
   public void addShoppingItemToCart(
       @PathVariable("id") int productId,

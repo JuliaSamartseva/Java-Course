@@ -16,27 +16,18 @@ import java.util.List;
 
 @Service
 public class ProductService {
-  @PersistenceContext
-  private EntityManager em;
-
-  @Autowired
-  ProductRepository productRepository;
-
-  @Autowired
-  ProductTypesRepository productTypesRepository;
-
-  @Autowired
-  ShoppingItemsRepository shoppingItemsRepository;
-
-  @Autowired
-  UserRepository userRepository;
+  @Autowired ProductRepository productRepository;
+  @Autowired ProductTypesRepository productTypesRepository;
+  @Autowired ShoppingItemsRepository shoppingItemsRepository;
+  @Autowired UserRepository userRepository;
+  @PersistenceContext private EntityManager em;
 
   public List<Product> allProducts() {
     return productRepository.findAll();
   }
 
   public List<ProductType> allProductTypes() {
-    return  productTypesRepository.findAll();
+    return productTypesRepository.findAll();
   }
 
   public List<ShoppingCartItem> allShoppingCartItems(int userId) {
@@ -68,7 +59,8 @@ public class ProductService {
   }
 
   public void addShoppingItem(int userId, int productId, int quantity) {
-    ShoppingCartItem item = shoppingItemsRepository.findShoppingCartItemByUserAndProductIds(userId, productId);
+    ShoppingCartItem item =
+        shoppingItemsRepository.findShoppingCartItemByUserAndProductIds(userId, productId);
     if (item != null) {
       item.setQuantity(item.getQuantity() + quantity);
     } else {
