@@ -43,7 +43,7 @@ public class ProductsController {
   }
 
   @PostMapping("/administrator/product-manager/{id}")
-  public String editProduct(@PathVariable(required = false) Integer id, @ModelAttribute("productForm") @Valid Product productForm, BindingResult bindingResult, Model model) {
+  public String editProduct(@PathVariable(required = false) Integer id, @ModelAttribute("productForm") @Valid Product productForm, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return "administrator/product-manager";
     }

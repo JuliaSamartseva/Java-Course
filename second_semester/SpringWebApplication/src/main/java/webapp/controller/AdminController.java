@@ -15,8 +15,7 @@ import java.util.List;
 
 @Controller
 public class AdminController {
-  @Autowired
-  private UserService userService;
+  @Autowired private UserService userService;
 
   @GetMapping("/administrator/home")
   public String homePage(KeycloakAuthenticationToken authentication) {
@@ -38,7 +37,7 @@ public class AdminController {
     return gson.toJson(userList.toArray(new User[] {}));
   }
 
-  @GetMapping( "/block-user/{id}")
+  @GetMapping("/block-user/{id}")
   @ResponseBody
   public void blockUser(@PathVariable Long id) {
     userService.blockUser(id);
@@ -48,16 +47,6 @@ public class AdminController {
   @ResponseBody
   public void unblockUser(@PathVariable Long id) {
     userService.unblockUser(id);
-  }
-
-  @PostMapping("/administrator/users")
-  public String  deleteUser(@RequestParam(required = true, defaultValue = "" ) Long userId,
-                            @RequestParam(required = true, defaultValue = "" ) String action,
-                            Model model) {
-    if (action.equals("delete")){
-      userService.deleteUser(userId);
-    }
-    return "/administrator/users";
   }
 
 }

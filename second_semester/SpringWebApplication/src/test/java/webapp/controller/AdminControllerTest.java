@@ -16,8 +16,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -36,12 +35,34 @@ public class AdminControllerTest {
   }
 
   @Test
+  public void testHomePage() {
+    assertEquals(adminController.homePage(authentication), "/administrator/home");
+  }
+
+  @Test
+  public void testUserList() {
+    assertEquals(adminController.userList(), "/administrator/users");
+  }
+
+  @Test
+  public void testGetUsers() {
+    List<User> users = new ArrayList<>();
+    User user = new User();
+    user.setId(1);
+    user.setName("testUser");
+    user.setType(UserType.CLIENT);
+    users.add(user);
+    when(userService.allUsers()).thenReturn(users);
+
+    Gson gson = new Gson();
+    assertEquals(adminController.getUsers(), gson.toJson(users.toArray(new User[] {})));
+  }
+
+  @Test
   public void testBlockUser() {
     User user = new User();
     user.setId(1);
     user.setName("testUser");
-    when(userService.getUserByUsername("testUser")).thenReturn(user);
-    when(userService.saveUser(user)).thenReturn(true);
 
     doAnswer(i->{
       user.setBlocked(true);
@@ -53,14 +74,19 @@ public class AdminControllerTest {
   }
 
   @Test
-  public void testHomePage() {
-    assertEquals(adminController.homePage(authentication), "/administrator/home");
+  public void testUnblockUser() {
+    User user = new User();
+    user.setId(1);
+    user.setName("testUser");
+    user.setBlocked(true);
+
+    doAnswer(i->{
+      user.setBlocked(false);
+      return null;
+    }).when(userService).unblockUser(1L);
+
+    adminController.unblockUser(1L);
+    assertFalse(user.isBlocked());
   }
 
-  static class PrincipalMock implements Principal {
-    @Override
-    public String getName() {
-      return "XXXXXXX";
-    }
-  }
 }

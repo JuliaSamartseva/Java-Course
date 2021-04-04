@@ -27,21 +27,12 @@ public class UserService {
   @Autowired
   RoleRepository roleRepository;
 
-  public User getUserByUsername(String name) {
-    return userRepository.findByName(name);
-  }
-
   public void blockUser(Long userId) {
     userRepository.changeBlockForUserWithId(userId, true);
   }
 
   public void unblockUser(Long userId) {
     userRepository.changeBlockForUserWithId(userId, false);
-  }
-
-  public User findUserById(Long userId) {
-    Optional<User> userFromDb = userRepository.findById(userId);
-    return userFromDb.orElse(new User());
   }
 
   public List<User> allUsers() {
@@ -75,14 +66,6 @@ public class UserService {
 
     userRepository.save(user);
     return true;
-  }
-
-  public boolean deleteUser(Long userId) {
-    if (userRepository.findById(userId).isPresent()) {
-      userRepository.deleteById(userId);
-      return true;
-    }
-    return false;
   }
 
   public int getUserId(KeycloakAuthenticationToken authentication) {
