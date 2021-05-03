@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PositionHelper {
   int producerPosition = -1;
-  List<Integer> readersPositions = new ArrayList<>();
+  List<Integer> readersPositions = new ArrayList<Integer>();
 
   public int getProducerPosition() {
     return producerPosition;
@@ -20,7 +20,7 @@ public class PositionHelper {
   }
 
   public void unsetReaderPosition(int position) {
-    readersPositions.remove(position);
+    readersPositions.remove(Integer.valueOf(position));
   }
 
   public boolean isPositionInReaders(int position) {
