@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <title>Result</title>
+</head>
+<body>
+    <p>Received result: </p>
+    <p th:text="'sender name: ' + ${message.title}" ></p>
+    <p th:text="'message received: ' + ${message.body}"></p>
+    <a href="/send">Submit another message</a>
+</body>
+</html>
